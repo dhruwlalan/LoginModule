@@ -1,0 +1,10 @@
+@use '../abstracts' as *;
+
+body {
+	// @include bg( $c: #0070ff , );
+	// @include bg( $lg: '168deg , #0070ff 60% , #00ffe0 60%' , );
+	@include bg( $lg: '168deg , #0070ff , #00ffe0 64%' , );
+	@include size( $h: 100vh , $w: null , );
+	-webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+}

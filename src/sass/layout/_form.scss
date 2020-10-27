@@ -1,0 +1,92 @@
+@use "../abstracts" as *;
+
+.form {
+	@include size( $h: 50rem , $w: 40rem , );
+	@include bg( $c: LIGHTCYAN , );
+	@include pbm( $rad: 1rem , );
+	@include pos-absolute( $c: mcenter , );
+	@include flex( $fd: column , $jc: null , $ai: null , );
+	box-shadow: 0 0 5rem 1rem rgb(0 0 0 / 25%);
+	overflow: hidden;
+
+	&__title {
+		@include size( $h: 5rem , $w: 100% , );
+		@include typo( $c: #0070ff , $ff: $mfont , $fs: 3rem , $fw: 500 , $ta: center , );
+		@include pbm( $mt: 2rem , );
+		z-index: 10;
+	}
+
+	&__body {
+		@include flex-item( $grow: 1 , $shrink: null , $basis: null , );
+		padding: 2rem;
+	}
+
+	&__footer {
+		@include typo( $c: white , $ff: $mfont , $fs: 1.5rem , $fw: 300 , $ta: center , );
+		@include pbm( $mb: 1.5rem , );
+		z-index: 10;
+
+		&--link {
+			@include typo( $c: #00ffe0 , $ff: $mfont , $fs: 1.5rem , $fw: 600 , $td: none , );
+			@include pos-relative();
+
+			&:hover::after {
+				content: '';
+				@include size( $h: 2px , $w: 100% , );
+				@include pos-absolute( $b: 0 , $l: 0 , $z: -1 , );
+				border-bottom: 2px solid #00ffe08c;
+			}
+		}
+	}
+
+	&__svg {
+		@include pos-absolute( $b: 0 , $l: 0 , );
+		fill: #0070ff;
+		border-radius: 0 0 1rem 1rem;
+	}
+
+	&__input-group {
+		@include pos-relative();
+		&:not(:last-child) {
+			margin-bottom: 2rem;
+		}
+		&:hover input {
+			border: 1px solid #0070ff;
+		}
+		&:hover label {
+			font-weight: 300;
+			color: #0070ff;
+		}
+	}
+
+	&__label {
+		@include typo( $c: #6fa2bc , $ff: $mfont , $fs: 1.5rem , $fw: 300 , );
+		@include bg( $c: LightCyan , );
+		@include pbm( $p: 0rem 4px , );
+		@include pos-absolute( $l: 1.5rem , $t: 1px , $z: 10 , );
+	}
+
+	&__input {
+		@include size( $h: 5rem , $w: 100% , );
+		@include typo( $c: #0070ff , $ff: $mfont , $fs: 2rem , $fw: 500 , );
+		@include bg( $c: inherit , );
+		@include pbm( $rad: 10px , $b: 1px solid #6fa2bc , $p: 0rem 1.5rem , $mt: 1rem , );
+		outline: none;
+		&:focus {
+			border: 1px solid #0070ff;
+		}
+	}
+
+	&__submit {
+		@include size( $h: 5rem , $w: 100% , );
+		@include bg( $c: #0070ff ,  );
+		@include typo( $c: white , $ff: $mfont , $fs: 2rem , $fw: 300 , );
+		@include pbm( $rad: 10px , $b: none , $p: 0rem 1.5rem , $mt: 1rem , );
+		outline: none;
+		cursor: pointer;
+
+		&:hover {
+			@include bg( $c: #0060da , );
+		}
+	}
+}
