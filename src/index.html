@@ -16,18 +16,23 @@
 	</head> 
 
 	<body>
-		<form class="form" autocomplete="off">
+		<form class="form">
 			<h3 class="form__title">Login</h3>
 			<div class="form__body">
-				<div class="form__input-group">
-					<input id="emailInput" type="email" class="form__input" autocomplete="new-password">
-					<label id="emailLabel" for="emailInput" class="form__label">Email</label>
+				<div class="form__group">
+					<div id="emailInput" class="form__group-input form__group-input--email" contenteditable="true"></div>
+					<label id="emailLabel" for="emailInput" class="form__group-label">Email</label>
 				</div>
-				<div class="form__input-group">
-					<input id="passInput" type="password" class="form__input">
-					<img class="form__input--passshowhide" src="assets/svg/passShow.svg">
-					<label id="passLabel" for="passInput" class="form__label">Password</label>
+				<div class="form__group form__group--pass">
+					<input id="passInput" type="password" class="form__group-input form__group-input--pass" autocomplete="new-password">
+					<label id="passLabel" for="passInput" class="form__group-label">Password</label>
+					<img class="form__group-input--passshowhide passshowhide-forpass" src="assets/svg/passShow.svg">
 				</div>
+				<div class="form__group form__group--passconf">
+					<input id="passConfInput" type="password" class="form__group-input form__group-input--pass" autocomplete="new-password">
+					<label id="passConfLabel" for="passConfInput" class="form__group-label">Password Confirm</label>
+					<img class="form__group-input--passshowhide passshowhide-forpassconf" src="assets/svg/passShow.svg">
+				</div> 
 				<input id="submit" type="submit" value="Login" class="form__submit">
 			</div>
 			<div class="form__footer">
