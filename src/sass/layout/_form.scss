@@ -28,6 +28,7 @@
 		&--link {
 			@include typo( $c: #00ffe0 , $ff: $mfont , $fs: 1.5rem , $fw: 600 , $td: none , );
 			@include pos-relative();
+			cursor: pointer;
 
 			&:hover::after , &:focus::after {
 				content: '';
@@ -86,6 +87,7 @@
 		@include bg( $c: #002fff ,  );
 		@include typo( $c: white , $ff: $mfont , $fs: 2rem , $fw: 300 , );
 		@include pbm( $rad: 10px , $b: none , $p: 0rem 1.5rem , $mt: 1rem , );
+		
 		outline: none;
 		cursor: pointer;
 
@@ -100,3 +102,25 @@
 		}
 	}
 }
+
+// input:-webkit-autofill:hover,
+// input:-webkit-autofill:focus,
+// input:-webkit-autofill:active {
+// 	font-size: 2rem;
+//   font-family: $mfont;
+//   -webkit-text-fill-color: blue;
+//   -webkit-transition-delay: 9999999s;
+// }
+
+// input:-internal-autofill-selected {
+//   appearance: menulist-button;
+//   background-color: transparent !important;
+//   background-image: none !important;
+//   color: -internal-light-dark(black, white) !important;
+// }
+
+// input:-webkit-autofill:focus::first-line {
+//   font-size: 2rem;
+//   font-family: $mfont;
+//   font-weight: 300;
+// }
