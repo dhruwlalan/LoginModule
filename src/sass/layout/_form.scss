@@ -59,6 +59,10 @@
 				font-weight: 900;
 			}
 
+			&--showpassword {
+				font-weight: 400;
+			}
+
 			&--passshowhide {
 				@include size( $h: 2rem , );
 				@include disable-selection;
@@ -125,4 +129,8 @@
 		fill: #002fff;
 		border-radius: 0 0 1rem 1rem;
 	}
+}
+
+.showpassword {
+	display: inline-block;
 }
