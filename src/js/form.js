@@ -3,6 +3,7 @@ const emailLabel = document.getElementById('emailLabel');
 const emailInput = document.getElementById('emailInput');
 const passLabel = document.getElementById('passLabel');
 const passInput = document.getElementById('passInput');
+const passShowHide = document.querySelector('.form__input--passshowhide');
 const forSignup = document.getElementById('forsignup')
 const submitBtn = document.getElementById('submit');
 const formFooterText = document.querySelector('.form__footer--text');
@@ -25,4 +26,15 @@ formFooterLink.addEventListener('click' , (e) => {
 		submitBtn.value = 'Login';
 		formFooterText.textContent = `I'm a new user,`;
 	}
+});
+
+passInput.addEventListener('mouseenter' , () => {
+	passShowHide.style.display = 'inline-block';
+});
+passInput.addEventListener('mouseleave' , () => {
+	passShowHide.style.display = 'none';
+});
+
+passShowHide.addEventListener('click' , () => {
+	
 });

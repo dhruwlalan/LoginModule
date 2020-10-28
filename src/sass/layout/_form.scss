@@ -80,6 +80,16 @@
 		&:focus + label {
 			color: #0070ff;
 		}
+
+		&--passshowhide {
+			@include pos-absolute( $t: 44% , $r: 1rem , );
+			@include size( $h: 2rem , );
+			@include disable-selection;
+			display: none;
+			cursor: pointer;
+			// filter: invert(9%) sepia(100%) saturate(5958%) hue-rotate(247deg) brightness(102%) contrast(136%);
+			filter: invert(28%) sepia(100%) saturate(3433%) hue-rotate(207deg) brightness(103%) contrast(101%);
+		}
 	}
 
 	&__submit {
@@ -87,7 +97,7 @@
 		@include bg( $c: #002fff ,  );
 		@include typo( $c: white , $ff: $mfont , $fs: 2rem , $fw: 300 , );
 		@include pbm( $rad: 10px , $b: none , $p: 0rem 1.5rem , $mt: 1rem , );
-		
+
 		outline: none;
 		cursor: pointer;
 
