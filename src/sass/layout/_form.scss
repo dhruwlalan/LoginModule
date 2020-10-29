@@ -34,10 +34,6 @@
 			border: 1px solid #0070ff;
 		}
 
-		&--passconf {
-			display: none;
-		}
-
 		&-input {
 			@include size( $h: 5rem , $w: 100% , );
 			@include bg( $c: inherit , );

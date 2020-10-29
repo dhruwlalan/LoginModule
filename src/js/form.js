@@ -26,34 +26,20 @@ formGroupInput.forEach((input) => {
 	});
 });
 
-formFooterLink.addEventListener('click' , (e) => {
-	if (e.target.textContent === 'Sign Up') {
-		formGroupPassconf.style.display = 'block';
-		e.target.textContent = 'Login';
-		formTitle.textContent = 'Sign Up';
-		submitBtn.value = 'Sign Up';
-		formFooterText.textContent = `I'm already a member,`;
-	} else {
-		formGroupPassconf.style.display = 'none';
-		e.target.textContent = 'Sign Up';
-		formTitle.textContent = 'Login';
-		submitBtn.value = 'Login';
-		formFooterText.textContent = `I'm a new user,`;
-	}
-});
-
 formGroupPass.addEventListener('mouseenter' , () => {
 	passShowHideForPass.classList.add('showpassword');
 });
 formGroupPass.addEventListener('mouseleave' , () => {
 	passShowHideForPass.classList.remove('showpassword');
 });
-formGroupPassconf.addEventListener('mouseenter' , () => {
-	passShowHideForPassconf.classList.add('showpassword');
-});
-formGroupPassconf.addEventListener('mouseleave' , () => {
-	passShowHideForPassconf.classList.remove('showpassword');
-});
+if (formGroupPassconf) {
+	formGroupPassconf.addEventListener('mouseenter' , () => {
+		passShowHideForPassconf.classList.add('showpassword');
+	});
+	formGroupPassconf.addEventListener('mouseleave' , () => {
+		passShowHideForPassconf.classList.remove('showpassword');
+	});
+}
 passShowHideForPass.addEventListener('click' , () => {
 	if (passInput.getAttribute('type') === 'password') {
 		passInput.setAttribute('type' , 'text');
@@ -67,16 +53,18 @@ passShowHideForPass.addEventListener('click' , () => {
 		passShowHideForPass.removeAttribute('style');
 	}
 });
-passShowHideForPassconf.addEventListener('click' , () => {
-	if (passConfInput.getAttribute('type') === 'password') {
-		passConfInput.setAttribute('type' , 'text');
-		passConfInput.classList.add('form__group-input--showpassword');
-		passShowHideForPassconf.setAttribute('src' , 'assets/svg/passHide.svg');
-		passShowHideForPassconf.style.display = 'inline-block';
-	} else {
-		passConfInput.setAttribute('type' , 'password');
-		passConfInput.classList.remove('form__group-input--showpassword');
-		passShowHideForPassconf.setAttribute('src' , 'assets/svg/passShow.svg');
-		passShowHideForPassconf.removeAttribute('style');
-	}
-});
+if (passShowHideForPassconf) {
+	passShowHideForPassconf.addEventListener('click' , () => {
+		if (passConfInput.getAttribute('type') === 'password') {
+			passConfInput.setAttribute('type' , 'text');
+			passConfInput.classList.add('form__group-input--showpassword');
+			passShowHideForPassconf.setAttribute('src' , 'assets/svg/passHide.svg');
+			passShowHideForPassconf.style.display = 'inline-block';
+		} else {
+			passConfInput.setAttribute('type' , 'password');
+			passConfInput.classList.remove('form__group-input--showpassword');
+			passShowHideForPassconf.setAttribute('src' , 'assets/svg/passShow.svg');
+			passShowHideForPassconf.removeAttribute('style');
+		}
+	});
+}

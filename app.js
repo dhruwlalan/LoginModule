@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const hpp = require('hpp');
 const helmet = require('helmet');
@@ -7,8 +8,14 @@ const mongoSanitize = require('express-mongo-sanitize');
 const AppError = require('./utils/appError');
 const errorController = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
+
+// setting the template engine:
+app.set('view engine' , 'pug');
+app.set('views' , path.join(__dirname , 'views'));
+app.use( express.static(path.join(__dirname , 'public')) );
 
 /* -- GLOBAL MIDDLEWARES -- */
 
@@ -39,18 +46,16 @@ const whitelist = { whitelist: [
 ]};
 app.use( hpp(whitelist) );
 
-// 7. Serving static files:
-app.use( express.static(`${__dirname }/public`) );
-
-// 8. Define Routers:
+// 7. Define Routers:
 app.use( '/api/v1/users' , userRouter );
+app.use( '/' , viewRouter );
 
-// 9. Handle undefined routes:
+// 8. Handle undefined routes:
 app.all( '*' , (req , res , next) => {
 	next(new AppError(`Can't find the route ${req.originalUrl } on this server!` , 404));
 });
 
-// 10. Global error handler middleware, executed when passed argument with next:
+// 9. Global error handler middleware, executed when passed argument with next:
 app.use(errorController);
 
 module.exports = app;
