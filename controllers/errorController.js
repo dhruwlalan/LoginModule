@@ -1,0 +1,90 @@
+const AppError = require('../utils/appError');
+
+// Send Error Based on Environment:
+const sendErrorDev = (err , res) => {
+	res.status(err.statusCode).json({
+		message: err.message ,
+		error: err ,
+		stack: err.stack ,
+	});
+}
+const sendErrorProd = (err , res) => {
+	if (err.isOperational) {
+		if (err.name === 'Error') {
+			res.status(err.statusCode).json({
+				status: err.status ,
+				message: err.message ,
+			});
+		} else {
+			res.status(err.statusCode).json({
+				status: err.status ,
+				error: err.name ,
+				message: err.message ,
+			});
+		}
+	} else {
+		console.error('Non-Operational Error!' , err);
+		res.status(500).json({
+			status: 'error' ,
+			message: 'Something went very wrong!' ,
+		})
+	}
+}
+
+// Various Error Handlers:
+const validationError = (err) => {
+	const errorsObj = err.errors;
+	const errors = Object.keys(errorsObj);
+	let message = '';
+	errors.forEach((error) => {
+		message += errorsObj[error].message;
+		message += ' ';
+	});
+	message = message.trim();
+	err = new AppError(message , 400);
+	err.name = 'Validation Error';
+	return err;
+}
+const handleCastError = (err) => {
+	const message = `Invalid ${err.path }: ${err.value }.`;
+	err = new AppError(message , 400);
+	err.name = 'Cast Error';
+	return err;
+}
+const handleDuplicateFields = (err) => {
+	const keys = Object.keys(err.keyValue);
+	const message = `field '${keys }' with value '${err.keyValue[keys] }' has already been taken!`;
+	err = new AppError(message , 400);
+	err.name = 'Duplicate Field Value Error';
+	return err;
+}
+const handleJWTError = (err) => {
+	return new AppError('Invalid Token. Please login again!' , 401);
+}
+const handleJWTExpiredError = (err) => {
+	return new AppError('Your token has expired! Please login again!' , 401);
+}
+
+module.exports = (err , req , res , next) => {
+	err.statusCode = err.statusCode || 500;
+	err.status = err.status || 'error';
+
+	if (process.env.NODE_ENV === 'development') {
+		sendErrorDev(err , res);
+	} else if (process.env.NODE_ENV === 'production') {
+		console.log(err.name);
+		
+		// handle all the validation errors:
+		if (err.name === 'ValidationError') err = validationError(err);
+		// handle cast errors:
+		if (err.name === 'CastError') err = handleCastError(err);
+		// handle duplicate field entry errors:
+		if (err.code === 11000) err = handleDuplicateFields(err);
+
+		if (err.name === 'JsonWebTokenError') err = handleJWTError(err);
+		if (err.name === 'TokenExpiredError') err = handleJWTExpiredError(err);
+
+		// send the error
+		sendErrorProd(err , res);
+	}
+}
