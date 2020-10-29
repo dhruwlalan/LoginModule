@@ -2,24 +2,45 @@ const User = require('../models/UserModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const sendResponse = require('../utils/sendResponse');
-const factory = require('./CrudHandlersFactory');
+const APIFeatures = require('../utils/apiFeatures');
+const createSendToken = require('../utils/createSendToken');
 
-const filterObj = (obj, ...allowedFields) => {
-    const newObj = {};
-    Object.keys(obj).forEach(el => {
-    if (allowedFields.includes(el)) newObj[el] = obj[el];
+
+// CRUD for admin:
+exports.getAllUsers = catchAsync(async (req , res) => {
+    const features = new APIFeatures(
+        User.find() , req.query
+    ).filter().sort().limitFields().paginate();
+    const users = await features.query;
+
+    sendResponse(res , 200 , { users } , users.length);
+});
+exports.getUser = catchAsync(async (req , res) => {
+    const user = await User.findById(req.params.id);
+    user.__v = undefined;
+    user.passwordChangedAt = undefined;
+    sendResponse(res , 200 , { user });
+});
+exports.createUser = catchAsync(async (req , res) => {
+    const newUser = await User.create(req.body);
+    newUser.active = undefined;
+    newUser.password = undefined;
+    newUser.__v = undefined;
+    sendResponse(res , 200 , { newUser });
+});
+exports.updateUser = catchAsync(async (req , res) => {
+    const user = await User.findByIdAndUpdate(req.params.id , req.body , {
+        new: true ,
+        runValidators: true ,
     });
-    return newObj;
-};
+    sendResponse(res , 200 , { user });
+});
+exports.deleteUser = catchAsync(async (req , res) => {
+    await User.findByIdAndDelete(req.params.id);
+    sendResponse(res , 204 , null);
+});
 
-// CRUD:
-exports.getAllUsers = factory.getAll(User , 'users');
-exports.getUser = factory.getOne(User , 'user');
-exports.createUser = factory.addOne(User , 'newUser');
-exports.updateUser = factory.updateOne(User , 'user');
-exports.deleteUser = factory.deleteOne(User);
-
-// for normal users:
+// UD for normal users:
 exports.updateMe = catchAsync(async (req , res , next) => {
     // 1) Create error if user POSTs password data
     if (req.body.password || req.body.passwordConfirm) {
@@ -27,7 +48,11 @@ exports.updateMe = catchAsync(async (req , res , next) => {
     }
 
     // 2) Filtered out unwanted fields names that are not allowed to be updated
-    const filteredBody = filterObj(req.body, 'name', 'email');
+    const filteredBody = {};
+    Object.keys(req.body).forEach(el => {
+        if (['name', 'email'].includes(el)) filteredBody[el] = req.body[el];
+    });
+
 
     // 3) Update user document
     const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
@@ -36,6 +61,23 @@ exports.updateMe = catchAsync(async (req , res , next) => {
     });
     
     sendResponse(res , 200 , { user: updatedUser });
+});
+exports.updatePassword = catchAsync(async (req , res , next) => {
+    // 1. get user from the collection:
+    const user = await User.findById(req.user.id).select('+password');
+
+    // 2. check if the posted current password is correct:
+    if (!(await user.correctPassword(req.body.passwordCurrent , user.password))) {
+        return next(new AppError('Your current password is wrong.' , 401))
+    }
+
+    // 3. if current password was correct, update new password:
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
+    await user.save();
+
+    // 4. log user in, send jwt:
+    createSendToken(user, 200, res);
 });
 exports.deleteMe = catchAsync(async (req , res , next) => {
     await User.findByIdAndUpdate(req.user.id, { active: false });

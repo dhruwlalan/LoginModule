@@ -72,15 +72,14 @@ module.exports = (err , req , res , next) => {
 	if (process.env.NODE_ENV === 'development') {
 		sendErrorDev(err , res);
 	} else if (process.env.NODE_ENV === 'production') {
-		console.log(err.name);
-		
-		// handle all the validation errors:
+			
+		// handle validation errors:
 		if (err.name === 'ValidationError') err = validationError(err);
 		// handle cast errors:
 		if (err.name === 'CastError') err = handleCastError(err);
 		// handle duplicate field entry errors:
 		if (err.code === 11000) err = handleDuplicateFields(err);
-
+		// handle jwt errors:
 		if (err.name === 'JsonWebTokenError') err = handleJWTError(err);
 		if (err.name === 'TokenExpiredError') err = handleJWTExpiredError(err);
 

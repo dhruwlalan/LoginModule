@@ -5,43 +5,9 @@ const User = require('../models/UserModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
+const createSendToken = require('../utils/createSendToken');
 
-const sendResponse = (res , statusCode , data , token) => {
-	res.status(statusCode).json({
-		status: 'success' ,
-		token ,
-		data: data ,
-	});
-}
-
-// create token
-const signToken = (id) => {
-	return jwt.sign({ id } , process.env.JWT_SECRET , {
-		expiresIn: process.env.JWT_EXPIRES_IN
-	});
-}
-// send token
-const createSendToken = (user , statusCode , res) => {
-	// create token:
-	const token = signToken(user._id);
-
-	// store in cookie:
-	const cookieOptions = {
-		expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000) ,
-		httpOnly: true ,
-	};
-	if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-	res.cookie('jwt' , token , cookieOptions);
-
-	// Remove unwanted fields from output:
-	user.password = undefined;
-	user.__v = undefined;
-	user.active = undefined;
-
-	sendResponse(res , statusCode , { user } , token);
-};
-
-
+// registration and login:
 exports.signup = catchAsync(async (req , res , next) => {
 	const newUser = await User.create({
 		name: req.body.name ,
@@ -52,7 +18,6 @@ exports.signup = catchAsync(async (req , res , next) => {
 	});
 	createSendToken(newUser , 201 , res);
 });
-
 exports.login = catchAsync(async (req , res , next) => {
 	const { email , password } = req.body;
 
@@ -70,6 +35,7 @@ exports.login = catchAsync(async (req , res , next) => {
 	createSendToken(user, 200, res);
 });
 
+// routes protection:
 exports.protect = catchAsync(async (req , res , next) => {
 	let token;
 	if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -89,7 +55,6 @@ exports.protect = catchAsync(async (req , res , next) => {
 	req.user = currentUser;
 	next();
 });
-
 exports.restrictTo = (...roles) => {
 	return (req , res , next) => {
 		if (!roles.includes(req.user.role)) {
@@ -99,6 +64,7 @@ exports.restrictTo = (...roles) => {
 	}
 };
 
+// reset password:
 exports.forgetPassword = catchAsync(async (req , res , next) => {
 	// 1. get user based on posted email:
 	const user = await User.findOne({ email: req.body.email });
@@ -131,7 +97,6 @@ exports.forgetPassword = catchAsync(async (req , res , next) => {
 		return next(new AppError('There was an error sending the email. Try again later!' , 500));
 	}
 });
-
 exports.resetPassword = catchAsync(async (req , res , next) => {
 	// 1. get user based on token:
 	const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
@@ -150,23 +115,5 @@ exports.resetPassword = catchAsync(async (req , res , next) => {
 
 	// 3. update changedPasswordAt property fot the user:
 	// 4. log the user in, send jwt:
-	createSendToken(user, 200, res);
-});
-
-exports.updatePassword = catchAsync(async (req , res , next) => {
-	// 1. get user from the collection:
-	const user = await User.findById(req.user.id).select('+password');
-
-	// 2. check if the posted current password is correct:
-	if (!(await user.correctPassword(req.body.passwordCurrent , user.password))) {
-		return next(new AppError('Your current password is wrong.' , 401))
-	}
-
-	// 3. if current password was correct, update new password:
-	user.password = req.body.password;
-	user.passwordConfirm = req.body.passwordConfirm;
-	await user.save();
-
-	// 4. log user in, send jwt:
 	createSendToken(user, 200, res);
 });
