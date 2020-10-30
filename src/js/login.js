@@ -7,7 +7,7 @@ const formGroupPass = document.querySelector('.form__group--pass');
 const formGroupInput = document.querySelectorAll('.form__group-input');
 const emailInput = document.getElementById('emailInput');
 const passInput = document.getElementById('passInput');
-const passShowHideForPass = document.querySelector('.passshowhide-forpass');
+const eyeSvg = document.querySelector('.form__group-input--eyesvg');
 
 
 formGroupInput.forEach((input) => {
@@ -19,22 +19,22 @@ formGroupInput.forEach((input) => {
 	});
 });
 formGroupPass.addEventListener('mouseenter' , () => {
-	passShowHideForPass.classList.add('showpassword');
+	eyeSvg.classList.add('showeyesvg');
 });
 formGroupPass.addEventListener('mouseleave' , () => {
-	passShowHideForPass.classList.remove('showpassword');
+	eyeSvg.classList.remove('showeyesvg');
 });
-passShowHideForPass.addEventListener('click' , () => {
+eyeSvg.addEventListener('click' , () => {
 	if (passInput.getAttribute('type') === 'password') {
 		passInput.setAttribute('type' , 'text');
 		passInput.classList.add('form__group-input--showpassword');
-		passShowHideForPass.setAttribute('src' , 'assets/svg/passHide.svg');
-		passShowHideForPass.style.display = 'inline-block';
+		eyeSvg.setAttribute('src' , 'assets/svg/passHide.svg');
+		eyeSvg.style.display = 'inline-block';
 	} else {
 		passInput.setAttribute('type' , 'password');
 		passInput.classList.remove('form__group-input--showpassword');
-		passShowHideForPass.setAttribute('src' , 'assets/svg/passShow.svg');
-		passShowHideForPass.removeAttribute('style');
+		eyeSvg.setAttribute('src' , 'assets/svg/passShow.svg');
+		eyeSvg.removeAttribute('style');
 	}
 });
 
@@ -42,7 +42,6 @@ const login = async (email , password) => {
 	try {
 		const res = await axios({
 			method: 'POST' ,
-			// url: 'http://127.0.0.1:8000/api/v1/users/login' ,
 			url: '/api/v1/users/login' ,
 			data: {
 				email ,

@@ -1,7 +1,7 @@
 
 extends base
 
-block script
+block append script
 	script(type='text/javascript' src='login.bundle.js')
 
 block content
@@ -9,12 +9,12 @@ block content
 		h3.form__title Login
 		div.form__body
 			div.form__group
-				div.form__group-input.form__group-input--email(id="emailInput" contenteditable="true")
+				div.form__group-input.form__group-input--text(id="emailInput" contenteditable="true")
 				label.form__group-label(id="emailLabel" for="emailInput") Email
 			div.form__group.form__group--pass
 				input.form__group-input.form__group-input--pass(id="passInput" type="password" autocomplete="new-password")
 				label.form__group-label(id="passLabel" for="passInput") Password
-				img.form__group-input--passshowhide.passshowhide-forpass(src="assets/svg/passShow.svg")
+				img.form__group-input--eyesvg(src="assets/svg/passShow.svg")
 			input.form__submit(id="submit" type="submit" value="Login")
 		div.form__footer
 			span.form__footer--text I'm a new user,
