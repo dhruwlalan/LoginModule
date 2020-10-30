@@ -1,6 +1,10 @@
 
 exports.root = (req , res) => {
-	res.status(200).render('signup');
+	if (res.locals.user) {
+		res.status(200).render('home');
+	} else {
+		res.redirect('/signup');
+	}
 }
 
 exports.login = (req , res) => {

@@ -67,6 +67,28 @@ exports.restrictTo = (...roles) => {
 	}
 };
 
+// Global middleware for checking if the user is logged in:
+exports.isLoggedIn = catchAsync(async (req , res , next) => {
+	if (req.cookies.jwt) {
+		// verify the token:
+		const decoded = await promisify(jwt.verify)(req.cookies.jwt , process.env.JWT_SECRET);
+		
+		// check if the user exists?:
+		const currentUser = await User.findById(decoded.id);
+		if (!currentUser) {
+			return next();
+		}
+		if (currentUser.changedPasswordAfter(decoded.iat)) {
+			return next();
+		}
+
+		// there is a logged in user:
+		res.locals.user = currentUser;
+		return next();
+	}
+	next();
+});
+
 // reset password:
 exports.forgetPassword = catchAsync(async (req , res , next) => {
 	// 1. get user based on posted email:

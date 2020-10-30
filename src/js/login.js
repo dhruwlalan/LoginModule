@@ -48,9 +48,11 @@ const login = async (email , password) => {
 				password ,
 			}
 		});
-		console.log(res);
+		if (res.data.status === 'success') {
+			location.assign('/');
+		}
 	} catch (e) {
-		console.log(e.response.data);
+		console.log(e.response.data.message);
 	}
 };
 form.addEventListener('submit' , (e) => {
