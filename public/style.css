@@ -88,7 +88,7 @@ body {
 .form__group-input:focus + label {
   color: #0070ff;
 }
-.form__group-input--email {
+.form__group-input--text {
   color: #002fff;
   font: 400 2rem "Montserrat", sans-serif;
   padding: 1.2rem 1.5rem;
@@ -101,7 +101,7 @@ body {
 .form__group-input--showpassword {
   font-weight: 400;
 }
-.form__group-input--passshowhide {
+.form__group-input--eyesvg {
   height: 2rem;
   -webkit-touch-callout: none;
   /* iOS Safari */
@@ -190,8 +190,6 @@ body {
   border-radius: 0 0 1rem 1rem;
 }
 
-.showpassword {
+.showeyesvg {
   display: inline-block;
 }
-
-/*# sourceMappingURL=style.css.map*/

@@ -45,7 +45,7 @@
 				color: #0070ff;
 			}
 
-			&--email {
+			&--text {
 				@include typo( $c: #002fff , $ff: $mfont , $fs: 2rem , $fw: 400 , );
 				@include pbm( $b: none , $p: 1.2rem 1.5rem , );
 			}
@@ -59,7 +59,7 @@
 				font-weight: 400;
 			}
 
-			&--passshowhide {
+			&--eyesvg {
 				@include size( $h: 2rem , );
 				@include disable-selection;
 				@include pos-absolute( $t: 50% , $r: 1rem , );
@@ -127,6 +127,6 @@
 	}
 }
 
-.showpassword {
+.showeyesvg {
 	display: inline-block;
 }

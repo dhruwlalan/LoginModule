@@ -1,16 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-	mode: 'development' ,
-	entry: { 
-		signup: path.resolve(__dirname, '../src/js/signup.js') ,
-		login: path.resolve(__dirname, '../src/js/login.js') ,
-	} ,
+	mode: 'production' ,
+	entry: { index: path.resolve(__dirname, '../src/js/index.js') } ,
 	output: {
-		filename: '[name].bundle.js' ,
+		filename: '[name].[contentHash].bundle.js' ,
 		path: path.resolve(__dirname, '../public') ,
 	} ,
 	module: {
@@ -23,14 +22,14 @@ module.exports = {
 				test: /\.css$/ ,
 				use: [
 					MiniCssExtractPlugin.loader ,
-					{ loader: 'css-loader' , options: { url: false, } } ,
+					{ loader: 'css-loader' , options: { url: false } } ,
 				] ,
 			} ,
 			{
 				test: /\.scss$/ ,
 				use: [
 					MiniCssExtractPlugin.loader ,
-					{ loader: 'css-loader' , options: { url: false, } } ,
+					{ loader: 'css-loader' , options: { url: false } } ,
 					'sass-loader' ,
 				] ,
 			} ,
@@ -43,7 +42,7 @@ module.exports = {
 				test: /\.ico$/ ,
 				use: {
 					loader: 'file-loader' ,
-					options: { name: 'favicon.ico' , outputPath: 'assets/favicon'} ,
+					options: { name: 'favicon.ico' , outputPath: 'assets/favicon' } ,
 				} ,
 			} ,
 			{
@@ -67,14 +66,20 @@ module.exports = {
 					options: { name: '[name].[ext]' , esModule: false , outputPath: 'assets/fonts' } ,
 				} ,
 			} ,
-		]
+		] ,
 	} ,
 	plugins: [
-		new MiniCssExtractPlugin({ filename: 'style.css' }) ,
+		new HtmlWebpackPlugin({ 
+			filename: 'index.html' ,
+			template: path.resolve(__dirname, '../src', 'index.html') ,
+			chunks: ['index'] ,
+		}) ,
+		new MiniCssExtractPlugin({ filename: 'style.[contentHash].css' }) ,
 		new CleanWebpackPlugin() ,
 	] ,
 	optimization: {
-        splitChunks: {
+		minimizer: [ new OptimizeCssAssetsPlugin() , new TerserPlugin() ] ,
+		splitChunks: {
             cacheGroups: {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/ ,
@@ -84,5 +89,5 @@ module.exports = {
                 }
             }
         }
-    } ,
+	} ,
 };

@@ -1,21 +1,23 @@
 
 extends base
 
+block script
+	script(type='text/javascript' src='signup.bundle.js')
+
 block content
 	form.form(autocomplete='off')
 		h3.form__title Sign Up
 		div.form__body
 			div.form__group
-				div.form__group-input.form__group-input--email(id="emailInput" contenteditable="true")
+				div.form__group-input.form__group-input--text(id="nameInput" contenteditable="true")
+				label.form__group-label(id="nameLabel" for="nameInput") Name
+			div.form__group
+				div.form__group-input.form__group-input--text(id="emailInput" contenteditable="true")
 				label.form__group-label(id="emailLabel" for="emailInput") Email
 			div.form__group.form__group--pass
 				input.form__group-input.form__group-input--pass(id="passInput" type="password" autocomplete="new-password")
 				label.form__group-label(id="passLabel" for="passInput") Password
-				img.form__group-input--passshowhide.passshowhide-forpass(src="assets/svg/passShow.svg")
-			div.form__group.form__group--passconf
-				input.form__group-input.form__group-input--pass(id="passConfInput" type="password" autocomplete="new-password")
-				label.form__group-label(id="passConfLabel" for="passConfInput") Password Confirm
-				img.form__group-input--passshowhide.passshowhide-forpassconf(src="assets/svg/passShow.svg")
+				img.form__group-input--eyesvg(src="assets/svg/passShow.svg")
 			input.form__submit(id="submit" type="submit" value="Sign Up")
 		div.form__footer
 			span.form__footer--text I'm already a member,

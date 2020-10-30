@@ -1,17 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
 	mode: 'development' ,
-	entry: { 
-		signup: path.resolve(__dirname, '../src/js/signup.js') ,
-		login: path.resolve(__dirname, '../src/js/login.js') ,
-	} ,
+	devtool: 'source-map' ,
+	entry: { index: path.resolve(__dirname, '../src/js/index.js') } ,
 	output: {
 		filename: '[name].bundle.js' ,
-		path: path.resolve(__dirname, '../public') ,
+		path: path.resolve(__dirname, '../dist') ,
 	} ,
 	module: {
 		rules: [
@@ -22,14 +18,14 @@ module.exports = {
 			{
 				test: /\.css$/ ,
 				use: [
-					MiniCssExtractPlugin.loader ,
+					'style-loader' ,
 					{ loader: 'css-loader' , options: { url: false, } } ,
 				] ,
 			} ,
 			{
-				test: /\.scss$/ ,
+				test: /\.scss$/ , 
 				use: [
-					MiniCssExtractPlugin.loader ,
+					'style-loader' ,
 					{ loader: 'css-loader' , options: { url: false, } } ,
 					'sass-loader' ,
 				] ,
@@ -67,12 +63,20 @@ module.exports = {
 					options: { name: '[name].[ext]' , esModule: false , outputPath: 'assets/fonts' } ,
 				} ,
 			} ,
-		]
+		] ,
 	} ,
 	plugins: [
-		new MiniCssExtractPlugin({ filename: 'style.css' }) ,
-		new CleanWebpackPlugin() ,
+		new HtmlWebpackPlugin({ 
+			filename: 'index.html' ,
+			template: path.resolve(__dirname, '../src', 'index.html') ,
+			chunks: ['index'] ,
+		}) ,
 	] ,
+	devServer: {
+	    historyApiFallback: true ,
+	    noInfo: true ,
+	    overlay: true ,
+	} ,
 	optimization: {
         splitChunks: {
             cacheGroups: {

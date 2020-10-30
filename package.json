@@ -8,6 +8,7 @@
     "scripts": {
         "start": "webpack-dev-server --config configs/webpack.start.js --open",
         "dev": "webpack --config configs/webpack.dev.js",
+        "dev:watch": "webpack --config configs/webpack.dev.js --watch",
         "prod": "webpack --config configs/webpack.prod.js",
         "startServer": "cross-env nodemon server.js",
         "buildServer": "cross-env NODE_ENV=production nodemon server.js",
