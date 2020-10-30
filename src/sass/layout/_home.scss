@@ -47,21 +47,40 @@
 
 .main {
 	@include bg( $c: LightCyan , );
-	@include pbm( $p: 2rem , $rad: 1rem , );
+	@include pbm( $p: 4rem , $rad: 1rem , );
 	box-shadow: 0 1rem 3rem rgb(0 0 0 / 25%);
 
 	&__title {
-		
+		@include typo( $c: #002fff , $ff: $mfont , $fs: 3.5rem , $fw: 500 , $ta: center , );
+		@include pbm( $mb: 4rem , );
 	}
+
 	&__details {
+		@include typo( $ff: $mfont , $fs: 2rem , );
+
 		&__row {
-			
+			@include size( $h: 3.5rem , $w: 100% , );
+			@include flex( $ai: center , );
+			&:not(:last-child) {
+				@include pbm( $mb: 2rem , );
+			}
 		}
+
 		&--key {
-			
+			@include size( $h: 100% , $w: 20rem , );
+			@include bg( $c: #002fff , );
+			@include typo( $c: white , $fw: 500 , );
+			@include pbm( $rad: 2rem 0 0 2rem , $pr: 1rem , );
+			@include flex( $jc: flex-end , $ai: center , );
 		}
+
 		&--value {
-			
+			@include size( $h: 100% , );
+			@include typo( $c: #002fff , $fw: 500 , );
+			@include pbm( $b: 1px solid #002fff , );
+			@include pbm( $rad: 0 2rem 2rem 0 , $pl: 1rem , );
+			@include flex( $jc: flex-start , $ai: center , );
+			@include flex-item( $grow: 1 , $shrink: null , $basis: null , );
 		}
 	}
 }
