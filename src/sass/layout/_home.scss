@@ -1,0 +1,47 @@
+@use "../abstracts" as *;
+
+.home {
+	@include size( $h: auto , $w: 100% , );
+}
+
+.navbar {
+	@include size( $h: 5rem , $w: 100% , );
+	@include bg( $c: LightCyan , );
+	@include pbm( $rad: 1rem , $p: 0 2rem , $bb: 1px solid #002fff , $mb: 2rem , );
+	@include flex( $jc: space-between , $ai: center , );
+	box-shadow: 0 0 4rem 1rem rgb(0 0 0 / 25%);
+
+	&__link {
+		@include flex( $ai: center , );
+
+		&--text {
+			@include typo( $c: #002fff , $ff: $mfont , $fs: 2rem , $fw: 600 , $td: none , );
+			@include pbm( $m: 0 5px , );
+		}
+		&--svg {
+			fill: #00ffe0;
+			@include size( $h: 2rem , $w: 2rem , );
+		}
+	}
+}
+
+.main {
+	@include bg( $c: LightCyan , );
+	@include pbm( $p: 2rem , $rad: 1rem , );
+	box-shadow: 0 0 4rem 1rem rgb(0 0 0 / 25%);
+	
+	&__title {
+		
+	}
+	&__details {
+		&__row {
+			
+		}
+		&--key {
+			
+		}
+		&--value {
+			
+		}
+	}
+}
