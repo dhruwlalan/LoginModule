@@ -1,3 +1,4 @@
+const form = document.querySelector('.form');
 const formTitle = document.querySelector('.form__title');
 const formGroup = document.querySelector('.form__group');
 const formGroupPass = document.querySelector('.form__group--pass');
@@ -68,3 +69,27 @@ if (passShowHideForPassconf) {
 		}
 	});
 }
+
+const login = async (email , password) => {
+	try {
+		const res = await axios({
+			method: 'POST' ,
+			// url: 'http://127.0.0.1:8000/api/v1/users/login' ,
+			url: '/api/v1/users/login' ,
+			data: {
+				email ,
+				password ,
+			}
+		});
+		console.log(res);
+	} catch (e) {
+		console.log(e.response.data);
+	}
+};
+
+form.addEventListener('submit' , (e) => {
+	e.preventDefault();
+	const email = emailInput.textContent;
+	const password = passInput.value;
+	login(email , password);
+});

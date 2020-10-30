@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
 	mode: 'development' ,
+	watch: true ,
 	devtool: 'source-map' ,
 	entry: { index: path.resolve(__dirname, '../src/js/index.js') } ,
 	output: {
