@@ -204,13 +204,11 @@ body {
   width: 100%;
   background: LightCyan;
   padding: 0 2rem;
-  border-bottom: 1px solid #002fff;
   border-radius: 1rem;
-  margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 4rem 1rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 4rem rgba(0, 0, 0, 0.25);
 }
 .navbar__link {
   display: flex;
@@ -223,14 +221,35 @@ body {
   margin: 0 5px;
 }
 .navbar__link--svg {
-  fill: #00ffe0;
+  fill: #002fff;
   height: 2rem;
   width: 2rem;
+}
+
+.pipes {
+  height: 2rem;
+  width: 100%;
+  position: relative;
+}
+.pipes__pipe {
+  height: 3rem;
+  width: 1rem;
+  background: LightCyan;
+  position: absolute;
+  top: 0;
+  border-radius: 50px;
+  transform: translateY(-5px);
+}
+.pipes__pipe--left {
+  left: 10rem;
+}
+.pipes__pipe--right {
+  right: 10rem;
 }
 
 .main {
   background: LightCyan;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 0 4rem 1rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25);
 }

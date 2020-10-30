@@ -7,9 +7,9 @@
 .navbar {
 	@include size( $h: 5rem , $w: 100% , );
 	@include bg( $c: LightCyan , );
-	@include pbm( $rad: 1rem , $p: 0 2rem , $bb: 1px solid #002fff , $mb: 2rem , );
+	@include pbm( $rad: 1rem , $p: 0 2rem , );
 	@include flex( $jc: space-between , $ai: center , );
-	box-shadow: 0 0 4rem 1rem rgb(0 0 0 / 25%);
+	box-shadow: 0 0 4rem rgb(0 0 0 / 25%);
 
 	&__link {
 		@include flex( $ai: center , );
@@ -19,8 +19,28 @@
 			@include pbm( $m: 0 5px , );
 		}
 		&--svg {
-			fill: #00ffe0;
+			fill: #002fff;
 			@include size( $h: 2rem , $w: 2rem , );
+		}
+	}
+}
+
+.pipes {
+	@include size( $h: 2rem , $w: 100% , );
+	@include pos-relative();
+
+	&__pipe {
+		@include size( $h: 3rem , $w: 1rem , );
+		@include bg( $c: LightCyan , );
+		@include pos-absolute( $t: 0 , );
+		@include pbm( $rad: 50px , );
+		transform: translateY( -5px );
+
+		&--left {
+			left: 10rem;
+		}
+		&--right {
+			right: 10rem;
 		}
 	}
 }
@@ -28,8 +48,8 @@
 .main {
 	@include bg( $c: LightCyan , );
 	@include pbm( $p: 2rem , $rad: 1rem , );
-	box-shadow: 0 0 4rem 1rem rgb(0 0 0 / 25%);
-	
+	box-shadow: 0 1rem 3rem rgb(0 0 0 / 25%);
+
 	&__title {
 		
 	}
