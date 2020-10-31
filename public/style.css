@@ -22,6 +22,61 @@ body {
   box-sizing: border-box;
 }
 
+.alert {
+  width: 40rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 2rem 1rem;
+  border-radius: 0 0 1rem 1rem;
+  margin: 0 auto;
+  font: 500 1.6rem "Montserrat", sans-serif;
+  text-align: center;
+  box-shadow: 0 0 4rem 1rem rgba(0, 0, 0, 0.25);
+}
+.alert--success {
+  color: #155724;
+  background-color: #9bf2b0;
+}
+.alert--error {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes slideOutUp {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    visibility: hidden;
+    transform: translate3d(0, -100%, 0);
+  }
+}
+.slideInDown {
+  animation-timing-function: ease;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: slideInDown;
+}
+
+.slideOutUp {
+  animation-timing-function: ease-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-name: slideOutUp;
+}
+
 .container {
   max-width: 100rem;
   margin: 0 auto;
