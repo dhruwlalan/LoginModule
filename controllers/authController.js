@@ -36,11 +36,37 @@ exports.login = catchAsync(async (req , res , next) => {
 });
 exports.logout = catchAsync(async (req , res , next) => {
 	res.cookie( 'jwt' , 'loggedOut' , {
-		expires: new Date(Date.now() + 1000) ,
+		expires: new Date(Date.now() + 2 * 1000) ,
 		httpOnly: true ,
 	});
 	res.status(200).json({ status: 'success' });
 });
+
+// Global middleware for checking if the user is logged in:
+exports.isLoggedIn = async (req , res , next) => {
+	try {
+		if (req.cookies.jwt) {
+			// verify the token:
+			const decoded = await promisify(jwt.verify)(req.cookies.jwt , process.env.JWT_SECRET);
+			
+			// check if the user exists?:
+			const currentUser = await User.findById(decoded.id);
+			if (!currentUser) {
+				return next();
+			}
+			if (currentUser.changedPasswordAfter(decoded.iat)) {
+				return next();
+			}
+
+			// there is a logged in user:
+			res.locals.user = currentUser;
+			return next();
+		}
+	} catch (e) {
+		return next();
+	}
+	next();
+};
 
 // routes protection:
 exports.protect = catchAsync(async (req , res , next) => {
@@ -73,28 +99,6 @@ exports.restrictTo = (...roles) => {
 		next();
 	}
 };
-
-// Global middleware for checking if the user is logged in:
-exports.isLoggedIn = catchAsync(async (req , res , next) => {
-	if (req.cookies.jwt) {
-		// verify the token:
-		const decoded = await promisify(jwt.verify)(req.cookies.jwt , process.env.JWT_SECRET);
-		
-		// check if the user exists?:
-		const currentUser = await User.findById(decoded.id);
-		if (!currentUser) {
-			return next();
-		}
-		if (currentUser.changedPasswordAfter(decoded.iat)) {
-			return next();
-		}
-
-		// there is a logged in user:
-		res.locals.user = currentUser;
-		return next();
-	}
-	next();
-});
 
 // reset password:
 exports.forgetPassword = catchAsync(async (req , res , next) => {

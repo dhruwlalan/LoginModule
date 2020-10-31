@@ -77,6 +77,23 @@ body {
   animation-name: slideOutUp;
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.spinner {
+  height: 2rem;
+  width: 2rem;
+  border: 2px solid white;
+  border-bottom: 2px solid #002fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
 .container {
   max-width: 100rem;
   margin: 0 auto;
@@ -198,6 +215,9 @@ body {
   font: 300 2rem "Montserrat", sans-serif;
   border: none;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   outline: none;
   cursor: pointer;
 }
@@ -327,7 +347,7 @@ body {
 }
 .main__title {
   color: #002fff;
-  font: 500 3.5rem "Montserrat", sans-serif;
+  font: 300 3.5rem "Montserrat", sans-serif;
   text-align: center;
   margin-bottom: 4rem;
 }

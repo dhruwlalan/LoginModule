@@ -13,12 +13,7 @@ logout.addEventListener('click' , async () => {
 			url: '/api/v1/users/logout' ,
 		});
 		if (res.data.status === 'success') {
-			setTimeout(() => {
-				showAlert('success' , 'Logged out Successfully!')
-				setTimeout(() => {
-					location.assign('/login');
-				} , 500 );
-			} , 500 );
+			location.reload(true);
 		}
 	} catch (e) {
 		console.log(e);

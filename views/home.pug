@@ -23,7 +23,8 @@ block content
 				div.pipes__pipe.pipes__pipe--left
 				div.pipes__pipe.pipes__pipe--right
 			div.main
-				- const name = user.name
+				- let name = user.name
+				- name = name.split(' ')[0]
 				- const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1)
 				h1.main__title Welcome, #{nameCapitalized}
 				div.main__details

@@ -7,6 +7,7 @@ import showAlert from './alerts.js';
 const form = document.querySelector('.form');
 const formGroupPass = document.querySelector('.form__group--pass');
 const formGroupInput = document.querySelectorAll('.form__group-input');
+const formSubmitText = document.querySelector('.form__submit--text');
 const nameInput = document.getElementById('nameInput');
 const emailInput = document.getElementById('emailInput');
 const passInput = document.getElementById('passInput');
@@ -41,6 +42,8 @@ eyeSvg.addEventListener('click' , () => {
 });
 
 const signup = async (name , email , password) => {
+	formSubmitText.textContent = '';
+	formSubmitText.classList.add('spinner');
 	try {
 		const res = await axios({
 			method: 'POST' ,
@@ -53,12 +56,16 @@ const signup = async (name , email , password) => {
 			}
 		});
 		if (res.data.status === 'success') {
+			formSubmitText.classList.remove('spinner');
+			formSubmitText.innerHTML = '&#10004;';
 			showAlert('success' , 'Created User Successfully!')
 			setTimeout(() => {
 				location.assign('/');
 			} , 500 );
 		}
 	} catch (e) {
+		formSubmitText.classList.remove('spinner');
+		formSubmitText.textContent = 'Login';
 		showAlert('error' , e.response.data.message);
 	}
 };
