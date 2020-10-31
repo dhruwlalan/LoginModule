@@ -2,6 +2,8 @@
 import './assets.js';
 
 // MAIN
+import showAlert from './alerts.js';
+
 const form = document.querySelector('.form');
 const formGroupPass = document.querySelector('.form__group--pass');
 const formGroupInput = document.querySelectorAll('.form__group-input');
@@ -51,10 +53,13 @@ const signup = async (name , email , password) => {
 			}
 		});
 		if (res.data.status === 'success') {
-			location.assign('/');
+			showAlert('success' , 'Created User Successfully!')
+			setTimeout(() => {
+				location.assign('/');
+			} , 500 );
 		}
 	} catch (e) {
-		console.log(e.response.data.message);
+		showAlert('error' , e.response.data.message);
 	}
 };
 form.addEventListener('submit' , (e) => {

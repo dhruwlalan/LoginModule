@@ -13,14 +13,22 @@
 
 	&__link {
 		@include flex( $ai: center , );
+		cursor: pointer;
+
+		&#edit:hover &--text { transform: translateX( 1px ); }
+		&#edit:hover &--svgbox { transform: translateX( -1px ); }
+		&#logout:hover &--text { transform: translateX( -1px ); }
+		&#logout:hover &--svgbox { transform: translateX( 1px ); }
 
 		&--text {
 			@include typo( $c: #002fff , $ff: $mfont , $fs: 2rem , $fw: 600 , $td: none , );
 			@include pbm( $m: 0 5px , );
+			transition: transform .3s ease;
 		}
 		&--svg {
-			fill: #002fff;
 			@include size( $h: 2rem , $w: 2rem , );
+			fill: #002fff;
+			&box { transition: transform .3s ease; }
 		}
 	}
 }

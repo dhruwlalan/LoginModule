@@ -7,7 +7,7 @@ const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
 const createSendToken = require('../utils/createSendToken');
 
-// registration and login:
+// user signup, login & logout:
 exports.signup = catchAsync(async (req , res , next) => {
 	const newUser = await User.create({
 		name: req.body.name ,
@@ -33,6 +33,13 @@ exports.login = catchAsync(async (req , res , next) => {
 
 	// legit user... send token:
 	createSendToken(user, 200, res);
+});
+exports.logout = catchAsync(async (req , res , next) => {
+	res.cookie( 'jwt' , 'loggedOut' , {
+		expires: new Date(Date.now() + 1000) ,
+		httpOnly: true ,
+	});
+	res.status(200).json({ status: 'success' });
 });
 
 // routes protection:

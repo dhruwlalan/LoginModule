@@ -8,6 +8,7 @@ module.exports = {
 	entry: { 
 		signup: path.resolve(__dirname, '../src/js/signup.js') ,
 		login: path.resolve(__dirname, '../src/js/login.js') ,
+		home: path.resolve(__dirname, '../src/js/home.js') ,
 	} ,
 	output: {
 		filename: '[name].bundle.js' ,

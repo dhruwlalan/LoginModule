@@ -268,17 +268,34 @@ body {
 .navbar__link {
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+.navbar__link#edit:hover .navbar__link--text {
+  transform: translateX(1px);
+}
+.navbar__link#edit:hover .navbar__link--svgbox {
+  transform: translateX(-1px);
+}
+.navbar__link#logout:hover .navbar__link--text {
+  transform: translateX(-1px);
+}
+.navbar__link#logout:hover .navbar__link--svgbox {
+  transform: translateX(1px);
 }
 .navbar__link--text {
   color: #002fff;
   font: 600 2rem "Montserrat", sans-serif;
   text-decoration: none;
   margin: 0 5px;
+  transition: transform 0.3s ease;
 }
 .navbar__link--svg {
-  fill: #002fff;
   height: 2rem;
   width: 2rem;
+  fill: #002fff;
+}
+.navbar__link--svgbox {
+  transition: transform 0.3s ease;
 }
 
 .pipes {
