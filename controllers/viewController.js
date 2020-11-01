@@ -3,7 +3,7 @@ exports.root = (req , res) => {
 	if (res.locals.user) {
 		res.status(200).render('home');
 	} else {
-		res.redirect('/login');
+		res.status(200).render('loginSignup');
 	}
 }
 
