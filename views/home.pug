@@ -27,10 +27,16 @@ block content
 				- name = name.split(' ')[0]
 				- const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1)
 				h1.main__title Welcome, #{nameCapitalized}
+			div.pipes
+				div.pipes__pipe.pipes__pipe--left
+				div.pipes__pipe.pipes__pipe--right
+			div.main
 				div.main__details
 					div.main__details__row
-						div.main__details--key Your Full Name
+						div.main__details__heading Your Details:
+					div.main__details__row
+						div.main__details--key Full Name
 						div.main__details--value #{user.name}
 					div.main__details__row
-						div.main__details--key Your Email
+						div.main__details--key Email
 						div.main__details--value #{user.email}

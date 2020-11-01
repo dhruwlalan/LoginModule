@@ -372,12 +372,23 @@ input:-webkit-autofill:focus::first-line {
 }
 .main__title {
   color: #002fff;
-  font: 300 3.5rem "Roboto", sans-serif;
+  font: 500 4rem "Roboto", sans-serif;
   text-align: center;
-  margin-bottom: 4rem;
 }
 .main__details {
   font: 2rem "Roboto", sans-serif;
+}
+.main__details__heading {
+  height: 100%;
+  width: 100%;
+  background: #002fff;
+  color: white;
+  font: 500 2rem "Roboto", sans-serif;
+  padding-right: 1rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .main__details__row {
   height: 3.5rem;
@@ -390,7 +401,7 @@ input:-webkit-autofill:focus::first-line {
 }
 .main__details--key {
   height: 100%;
-  width: 20rem;
+  width: 18rem;
   background: #002fff;
   color: white;
   font-weight: 500;
