@@ -106,6 +106,7 @@ eyeSvg.addEventListener('click' , () => {
 	}
 });
 
+// login user:
 const login = async (email , password) => {
 	formSubmitBtnText.textContent = '';
 	formSubmitBtnText.classList.add('spinner');

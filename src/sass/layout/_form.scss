@@ -25,8 +25,8 @@
 		@include bg( $c: inherit , );
 		@include pbm( $rad: 1rem , $b: 1px solid #6fa2bc , );
 		@include pos-relative();
-		
 		&:not(:last-child) { margin-bottom: 2.5rem; }
+		
 		&-input {
 			@include size( $h: 5rem , $w: 100% , );
 			@include bg( $c: inherit , );
