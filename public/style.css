@@ -219,6 +219,7 @@ body {
   font: 300 2rem "Roboto", sans-serif;
   border: none;
   border-radius: 10px;
+  margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -233,6 +234,15 @@ body {
 }
 .form__submit-btn:focus {
   box-shadow: 0 0 0 4px rgba(0, 49, 255, 0.25);
+}
+.form__forget-password {
+  color: #5365b9;
+  font: 400 1rem "Roboto", sans-serif;
+  text-decoration: none;
+  outline: none;
+}
+.form__forget-password:hover, .form__forget-password:focus {
+  border-bottom: 2px solid rgba(83, 101, 185, 0.25);
 }
 .form__footer {
   color: white;

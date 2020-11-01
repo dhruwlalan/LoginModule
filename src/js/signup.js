@@ -160,7 +160,7 @@ const signup = async (name , email , password) => {
 		formSubmitBtnText.classList.remove('spinner');
 		formSubmitBtnText.innerHTML = '&#10007;';
 		setTimeout(() => {
-			formSubmitBtnText.textContent = 'Sign Up';
+			formSubmitBtnText.textContent = 'Create Account';
 		} , 500 );
 		showAlert('error' , e.response.data.message);
 	}
