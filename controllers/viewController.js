@@ -18,3 +18,7 @@ exports.signup = (req , res) => {
 exports.forgetPassword = (req , res) => {
 	res.status(200).render('forgetPassword');
 }
+
+exports.resetPassword = (req , res) => {
+	res.status(200).render('resetPassword');
+}

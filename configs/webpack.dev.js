@@ -10,6 +10,7 @@ module.exports = {
 		login: path.resolve(__dirname, '../src/js/login.js') ,
 		home: path.resolve(__dirname, '../src/js/home.js') ,
 		forgetPassword: path.resolve(__dirname, '../src/js/forgetPassword.js') ,
+		resetPassword: path.resolve(__dirname, '../src/js/resetPassword.js') ,
 	} ,
 	output: {
 		filename: '[name].bundle.js' ,
