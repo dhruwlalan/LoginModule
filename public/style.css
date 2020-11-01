@@ -132,20 +132,11 @@ body {
   width: 100%;
   background: inherit;
   border: 1px solid #6fa2bc;
-  border-radius: 10px;
+  border-radius: 1rem;
   position: relative;
 }
 .form__group:not(:last-child) {
   margin-bottom: 2.5rem;
-}
-.form__group:hover {
-  border: 1px solid #002fff;
-}
-.form__group:hover .form__group-label {
-  color: #002fff;
-}
-.form__group--focused {
-  border: 1px solid tomato;
 }
 .form__group-input {
   height: 5rem;
@@ -156,21 +147,13 @@ body {
   padding: 1rem 1.5rem;
   border: none;
   outline: none;
+  caret-color: #6fa2bc;
 }
-.form__group-input:focus + label {
-  color: tomato;
-}
-.form__group-input--text {
-  color: #002fff;
-  font: 400 2rem "Roboto", sans-serif;
-  padding: 1.2rem 1.5rem;
-  border: none;
-}
-.form__group-input--pass {
+.form__group-input#passInput {
   width: 90%;
-  font-family: sans;
+  font-family: "Roboto", sans-serif;
 }
-.form__group-input--showpassword {
+.form__group-input--showpassword#passInput {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
@@ -220,7 +203,7 @@ body {
   user-select: none;
   /* Non-prefixed version, currently supported by Chrome and Opera */
 }
-.form__submit {
+.form__submit-btn {
   height: 5rem;
   width: 100%;
   background: #002fff;
@@ -234,13 +217,13 @@ body {
   outline: none;
   cursor: pointer;
 }
-.form__submit:hover {
+.form__submit-btn:hover {
   background: #002be9;
 }
-.form__submit:active {
+.form__submit-btn:active {
   background: #002fff;
 }
-.form__submit:focus {
+.form__submit-btn:focus {
   box-shadow: 0 0 0 4px rgba(0, 49, 255, 0.25);
 }
 .form__footer {
@@ -270,7 +253,7 @@ body {
 .form__footer--link:focus {
   outline: none;
 }
-.form__svg {
+.form__footer--svg {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -282,13 +265,30 @@ body {
   display: inline-block;
 }
 
+.focus-input {
+  border: 1px solid tomato;
+}
+
+.focus-label {
+  color: tomato;
+}
+
+.hover-input {
+  border: 1px solid tomato;
+}
+
+.hover-label {
+  color: tomato;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   -webkit-text-fill-color: #002fff;
   transition: background-color 10000000s ease-in-out 0s;
 }
-
+input:-webkit-autofill::first-line,
+input:-webkit-autofill:hover::first-line,
 input:-webkit-autofill:focus::first-line {
   color: #002fff;
   font: 400 2rem "Roboto", sans-serif;
