@@ -31,7 +31,7 @@
 		&:hover .form__group-label { color: #002fff; }
 
 		&--focused {
-			border: 1px solid #0070ff;
+			border: 1px solid tomato;
 		}
 
 		&-input {
@@ -42,7 +42,7 @@
 			outline: none;
 
 			&:focus + label {
-				color: #0070ff;
+				color: tomato;
 			}
 
 			&--text {
@@ -52,10 +52,11 @@
 
 			&--pass {
 				@include size( $w: 90% , );
-				font-weight: 900;
+				@include typo( $ff: sans );
 			}
 
 			&--showpassword {
+				@include typo( $ff: $mfont );
 				font-weight: 400;
 			}
 
@@ -76,6 +77,7 @@
 			@include pbm( $p: 0rem 5px , $rad: 50px , );
 			@include pos-absolute( $l: 1.5rem , $t: 0px , $z: 10 , );
 			transform: translateY( -9px );
+			@include disable-selection;
 		}
 	}
 
@@ -128,6 +130,16 @@
 	}
 }
 
+
 .showeyesvg {
 	display: inline-block;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #002fff;
+  transition: background-color 10000000s ease-in-out 0s;
+}
+input:-webkit-autofill:focus::first-line {
+  @include typo( $c: #002fff , $ff: $mfont , $fs: 2rem , $fw: 400 , );
 }

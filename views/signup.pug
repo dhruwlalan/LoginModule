@@ -5,14 +5,15 @@ block append script
 	script(type='text/javascript' src='signup.bundle.js')
 
 block content
-	form.form(autocomplete='off')
+	form.form()
 		h3.form__title Sign Up
 		div.form__body
 			div.form__group
 				div.form__group-input.form__group-input--text(id='nameInput' contenteditable='true')
 				label.form__group-label(id='nameLabel' for='nameInput') Full Name
 			div.form__group
-				div.form__group-input.form__group-input--text(id='emailInput' contenteditable='true')
+				//- div.form__group-input.form__group-input--text(id='emailInput' contenteditable='true')
+				input.form__group-input.form__group-input--text(id='emailInput' type='email')
 				label.form__group-label(id='emailLabel' for='emailInput') Email
 			div.form__group.form__group--pass
 				input.form__group-input.form__group-input--pass(id='passInput' type='password' autocomplete='new-password')

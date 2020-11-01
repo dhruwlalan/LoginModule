@@ -3,6 +3,7 @@ import './assets.js';
 
 // MAIN
 import showAlert from './alerts.js';
+import validator from 'validator';
 
 const form = document.querySelector('.form');
 const formGroupPass = document.querySelector('.form__group--pass');
@@ -11,6 +12,7 @@ const formSubmitText = document.querySelector('.form__submit--text');
 const emailInput = document.getElementById('emailInput');
 const passInput = document.getElementById('passInput');
 const eyeSvg = document.querySelector('.form__group-input--eyesvg');
+let pass;
 
 
 formGroupInput.forEach((input) => {
@@ -41,7 +43,11 @@ eyeSvg.addEventListener('click' , () => {
 	}
 });
 
+
 const login = async (email , password) => {
+	const enteredEmail = emailInput.textContent;
+	const enteredPass = passInput.value;
+	console.log(enteredEmail , enteredPass);
 	formSubmitText.textContent = '';
 	formSubmitText.classList.add('spinner');
 	try {
