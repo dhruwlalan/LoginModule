@@ -11,6 +11,7 @@ module.exports = {
 		home: path.resolve(__dirname, '../src/js/home.js') ,
 		forgetPassword: path.resolve(__dirname, '../src/js/forgetPassword.js') ,
 		resetPassword: path.resolve(__dirname, '../src/js/resetPassword.js') ,
+		edit: path.resolve(__dirname, '../src/js/edit.js') ,
 	} ,
 	output: {
 		filename: '[name].bundle.js' ,

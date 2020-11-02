@@ -1,0 +1,19 @@
+@use "../abstracts" as *;
+
+.edit {
+	
+	&__title {
+		@include typo( $c: #5365b9 , $ff: $mfont , $fs: 2rem , $fw: 400 , $ta: center , );
+		@include pbm( $mb: 1rem , );
+	}
+	&__submit-btn {
+		@include pbm( $mb: 0 , );
+	}
+	&__body {
+		@include pbm( $pb: 0 , );
+	}
+}
+.form--edit {
+	@include size( $h: null , $w: 40rem , );
+	@include pbm( $m: 0 auto , );
+}

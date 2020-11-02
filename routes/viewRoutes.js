@@ -6,6 +6,7 @@ router.use(authController.isLoggedIn);
 
 router.use( '/signup' , viewController.signup);
 router.use( '/login' , viewController.login);
+router.use( '/edit' , authController.protect , viewController.edit);
 router.use( '/forgetPassword' , viewController.forgetPassword);
 router.use( '/resetPassword/:token' , viewController.resetPassword);
 router.use( '/' , viewController.root);

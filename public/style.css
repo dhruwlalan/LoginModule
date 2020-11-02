@@ -94,6 +94,27 @@ body {
   animation: spin 1s linear infinite;
 }
 
+.pipes {
+  height: 2rem;
+  width: 100%;
+  position: relative;
+}
+.pipes__pipe {
+  height: 3rem;
+  width: 1rem;
+  background: LightCyan;
+  position: absolute;
+  top: 0;
+  border-radius: 50px;
+  transform: translateY(-5px);
+}
+.pipes__pipe--left {
+  left: 10rem;
+}
+.pipes__pipe--right {
+  right: 10rem;
+}
+
 .container {
   max-width: 100rem;
   margin: 0 auto;
@@ -348,6 +369,12 @@ input:-webkit-autofill:focus::first-line {
 .navbar__link#edit:hover .navbar__link--svgbox {
   transform: translateX(-1px);
 }
+.navbar__link#home:hover .navbar__link--text {
+  transform: translateX(1px);
+}
+.navbar__link#home:hover .navbar__link--svgbox {
+  transform: translateX(-1px);
+}
 .navbar__link#logout:hover .navbar__link--text {
   transform: translateX(-1px);
 }
@@ -368,27 +395,6 @@ input:-webkit-autofill:focus::first-line {
 }
 .navbar__link--svgbox {
   transition: transform 0.3s ease;
-}
-
-.pipes {
-  height: 2rem;
-  width: 100%;
-  position: relative;
-}
-.pipes__pipe {
-  height: 3rem;
-  width: 1rem;
-  background: LightCyan;
-  position: absolute;
-  top: 0;
-  border-radius: 50px;
-  transform: translateY(-5px);
-}
-.pipes__pipe--left {
-  left: 10rem;
-}
-.pipes__pipe--right {
-  right: 10rem;
 }
 
 .main {
@@ -504,4 +510,22 @@ input:-webkit-autofill:focus::first-line {
 }
 .ls__links--link:focus {
   box-shadow: 0 0 0 4px rgba(0, 49, 255, 0.25);
+}
+
+.edit__title {
+  color: #5365b9;
+  font: 400 2rem "Roboto", sans-serif;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.edit__submit-btn {
+  margin-bottom: 0;
+}
+.edit__body {
+  padding-bottom: 0;
+}
+
+.form--edit {
+  width: 40rem;
+  margin: 0 auto;
 }

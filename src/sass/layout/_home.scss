@@ -1,8 +1,6 @@
 @use "../abstracts" as *;
 
-.home {
-	@include size( $h: auto , $w: 100% , );
-}
+.home { @include size( $h: auto , $w: 100% , ); }
 
 .navbar {
 	@include size( $h: 5rem , $w: 100% , );
@@ -17,6 +15,8 @@
 
 		&#edit:hover &--text { transform: translateX( 1px ); }
 		&#edit:hover &--svgbox { transform: translateX( -1px ); }
+		&#home:hover &--text { transform: translateX( 1px ); }
+		&#home:hover &--svgbox { transform: translateX( -1px ); }
 		&#logout:hover &--text { transform: translateX( -1px ); }
 		&#logout:hover &--svgbox { transform: translateX( 1px ); }
 
@@ -29,26 +29,6 @@
 			@include size( $h: 2rem , $w: 2rem , );
 			fill: #002fff;
 			&box { transition: transform .3s ease; }
-		}
-	}
-}
-
-.pipes {
-	@include size( $h: 2rem , $w: 100% , );
-	@include pos-relative();
-
-	&__pipe {
-		@include size( $h: 3rem , $w: 1rem , );
-		@include bg( $c: LightCyan , );
-		@include pos-absolute( $t: 0 , );
-		@include pbm( $rad: 50px , );
-		transform: translateY( -5px );
-
-		&--left {
-			left: 10rem;
-		}
-		&--right {
-			right: 10rem;
 		}
 	}
 }

@@ -15,6 +15,10 @@ exports.signup = (req , res) => {
 	res.status(200).render('signup');
 }
 
+exports.edit = (req , res) => {
+	res.status(200).render('edit');
+}
+
 exports.forgetPassword = (req , res) => {
 	res.status(200).render('forgetPassword');
 }

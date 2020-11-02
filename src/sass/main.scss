@@ -4,8 +4,10 @@
 // COMPONENTS
 @use "components/alerts";
 @use "components/spinner";
+@use "components/pipes";
 // LAYOUT
 @use "layout/container";
 @use "layout/form";
 @use "layout/home";
 @use "layout/loginSignup";
+@use "layout/edit";

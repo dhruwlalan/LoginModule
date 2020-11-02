@@ -4,8 +4,12 @@ import './assets.js';
 // MAIN
 import showAlert from './alerts.js';
 
+const edit = document.getElementById('edit');
 const logout = document.getElementById('logout');
 
+edit.addEventListener('click' , () => {
+	location.assign('/edit');
+});
 logout.addEventListener('click' , async () => {
 	try {
 		const res = await axios({
@@ -16,6 +20,6 @@ logout.addEventListener('click' , async () => {
 			location.reload(true);
 		}
 	} catch (e) {
-		console.log(e);
+		showAlert('error' , e);
 	}
 });
