@@ -167,6 +167,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 
 /***/ }),
 
+/***/ "./src/assets/images/default.png":
+/*!***************************************!*\
+  !*** ./src/assets/images/default.png ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"assets/images/default.png\";\n\n//# sourceURL=webpack:///./src/assets/images/default.png?");
+
+/***/ }),
+
 /***/ "./src/assets/svg/passHide.svg":
 /*!*************************************!*\
   !*** ./src/assets/svg/passHide.svg ***!
@@ -209,7 +220,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/main.scss */ \"./src/sass/main.scss\");\n/* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_main_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _assets_favicon_favicon_ico__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/favicon/favicon.ico */ \"./src/assets/favicon/favicon.ico\");\n/* harmony import */ var _assets_svg_passHide_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/svg/passHide.svg */ \"./src/assets/svg/passHide.svg\");\n/* harmony import */ var _assets_svg_passHide_svg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_svg_passHide_svg__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _assets_svg_passShow_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/svg/passShow.svg */ \"./src/assets/svg/passShow.svg\");\n/* harmony import */ var _assets_svg_passShow_svg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_svg_passShow_svg__WEBPACK_IMPORTED_MODULE_3__);\n// SASS\n // ASSETS\n\n\n\n\n\n//# sourceURL=webpack:///./src/js/assets.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/main.scss */ \"./src/sass/main.scss\");\n/* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_main_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _assets_favicon_favicon_ico__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/favicon/favicon.ico */ \"./src/assets/favicon/favicon.ico\");\n/* harmony import */ var _assets_svg_passHide_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/svg/passHide.svg */ \"./src/assets/svg/passHide.svg\");\n/* harmony import */ var _assets_svg_passHide_svg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_svg_passHide_svg__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _assets_svg_passShow_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/svg/passShow.svg */ \"./src/assets/svg/passShow.svg\");\n/* harmony import */ var _assets_svg_passShow_svg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_svg_passShow_svg__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _assets_images_default_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/images/default.png */ \"./src/assets/images/default.png\");\n/* harmony import */ var _assets_images_default_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_images_default_png__WEBPACK_IMPORTED_MODULE_4__);\n// SASS\n // ASSETS\n\n\n\n\n\n\n//# sourceURL=webpack:///./src/js/assets.js?");
 
 /***/ }),
 

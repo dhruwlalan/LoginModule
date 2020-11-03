@@ -5,3 +5,4 @@ import '../sass/main.scss';
 import '../assets/favicon/favicon.ico';
 import '../assets/svg/passHide.svg';
 import '../assets/svg/passShow.svg';
+import '../assets/images/default.png';

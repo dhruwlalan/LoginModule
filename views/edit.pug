@@ -23,17 +23,27 @@ block content
 				div.pipes__pipe.pipes__pipe--left
 				div.pipes__pipe.pipes__pipe--right
 			div.main
-				form.form--edit.form--edit--data(autocomplete='off')
-					h3.edit__title Update Your Data.
-					div.form__body.edit__body
-						div.form__group.form__group--name
-							input.form__group-input(id='nameInput' type='text' value=`${user.name}`)
-							label.form__group-label(id='nameLabel' for='nameInput') Full Name
-						div.form__group.form__group--email
-							input.form__group-input(id='emailInput' type='email' value=`${user.email}`)
-							label.form__group-label(id='emailLabel' for='emailInput') Email
-						button.form__submit-btn.edit__submit-btn(type='submit')
-							span.form__submit-btn--text.edit__submitdata-btn--text Update
+				div.edit
+					form.form--edit.form--edit--data(autocomplete='off')
+						h3.edit__title Update Your Data.
+						div.form__body.edit__body
+							div.form__group.form__group--name
+								input.form__group-input(id='nameInput' type='text' value=`${user.name}`)
+								label.form__group-label(id='nameLabel' for='nameInput') Full Name
+							div.form__group.form__group--email
+								input.form__group-input(id='emailInput' type='email' value=`${user.email}`)
+								label.form__group-label(id='emailLabel' for='emailInput') Email
+							button.form__submit-btn.edit__submit-btn(type='submit')
+								span.form__submit-btn--text.edit__submitdata-btn--text Update Data
+					form.form--edit.form--edit--profile(autocomplete='off')
+						h3.edit__title Update Your Profile Image.
+						div.form__body.edit__body
+							div.form__group__profile
+								img.form__group__profile--preview(id="uploadImagePreview" src=`/assets/images/${user.photo}`)
+								input.form__group__profile--input(id="uploadImageInput" type="file" accept="image/*")
+								label.form__group__profile--label(id="uploadImageLabel" for='uploadImageInput') select
+							button.form__submit-btn.edit__submit-btn(type='submit')
+								span.form__submit-btn--text.edit__submitdata-btn--text Update Image
 			div.pipes
 				div.pipes__pipe.pipes__pipe--left
 				div.pipes__pipe.pipes__pipe--right

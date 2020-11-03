@@ -241,6 +241,47 @@ body {
   user-select: none;
   /* Non-prefixed version, currently supported by Chrome and Opera */
 }
+.form__group__profile {
+  height: 12.5rem;
+  width: 100%;
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form__group__profile--preview {
+  height: 13rem;
+  width: 13rem;
+  border: 2px solid rgba(0, 49, 255, 0.25);
+  border-radius: 50%;
+  margin-right: 2rem;
+}
+.form__group__profile--input {
+  display: none;
+}
+.form__group__profile--label {
+  height: 4rem;
+  width: 10rem;
+  background: #002fff;
+  color: white;
+  font: 300 2rem "Roboto", sans-serif;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  cursor: pointer;
+}
+.form__group__profile--label:hover {
+  background: #002be9;
+}
+.form__group__profile--label:active {
+  background: #002fff;
+}
+.form__group__profile--label:focus, .form__group__profile--label:active {
+  box-shadow: 0 0 0 4px rgba(0, 49, 255, 0.25);
+}
 .form__submit-btn {
   height: 5rem;
   width: 100%;
@@ -405,8 +446,23 @@ input:-webkit-autofill:focus::first-line {
 }
 .main__title {
   color: #002fff;
+  font: 400 4rem "Roboto", sans-serif;
+  text-align: center;
+}
+.main__profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__profile--name {
+  color: #002fff;
   font: 500 4rem "Roboto", sans-serif;
   text-align: center;
+}
+.main__profile--img {
+  height: 4rem;
+  width: 4rem;
+  margin-right: 1rem;
 }
 .main__details {
   font: 2rem "Roboto", sans-serif;
@@ -512,6 +568,11 @@ input:-webkit-autofill:focus::first-line {
   box-shadow: 0 0 0 4px rgba(0, 49, 255, 0.25);
 }
 
+.edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .edit__title {
   color: #5365b9;
   font: 400 2rem "Roboto", sans-serif;

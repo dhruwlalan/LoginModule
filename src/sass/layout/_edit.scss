@@ -1,6 +1,7 @@
 @use "../abstracts" as *;
 
 .edit {
+	@include flex( $jc: space-between , $ai: center , );
 	
 	&__title {
 		@include typo( $c: #5365b9 , $ff: $mfont , $fs: 2rem , $fw: 400 , $ta: center , );
@@ -13,6 +14,7 @@
 		@include pbm( $pb: 0 , );
 	}
 }
+
 .form--edit {
 	@include size( $h: null , $w: 40rem , );
 	@include pbm( $m: 0 auto , );
