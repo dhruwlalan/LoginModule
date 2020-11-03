@@ -8,6 +8,7 @@ import validator from 'validator';
 const home = document.getElementById('home');
 const logout = document.getElementById('logout');
 const formEditData = document.querySelector('.form--edit--data');
+const formEditProfile = document.querySelector('.form--edit--profile');
 const formEditPass = document.querySelector('.form--edit--pass');
 const formGroupName = document.querySelector('.form__group--name');
 const formGroupEmail = document.querySelector('.form__group--email');
@@ -26,6 +27,9 @@ const eyeSvgForCurPass = document.querySelector('.eyesvgforcurpass');
 const eyeSvgForNewPass = document.querySelector('.eyesvgfornewpass');
 const formSubmitDataBtnText = document.querySelector('.edit__submitdata-btn--text');
 const formSubmitPassBtnText = document.querySelector('.edit__submitpass-btn--text');
+const uploadImagePreview = document.getElementById('uploadImagePreview');
+const uploadImageInput = document.getElementById('uploadImageInput');
+const uploadImageLabel = document.getElementById('uploadImageLabel');
 
 let EnteredName = 'notEntered';
 let EnteredEmail = 'notEntered';
@@ -239,7 +243,7 @@ const updateUserData = async (name , email) => {
 		formSubmitDataBtnText.classList.remove('spinner');
 		formSubmitDataBtnText.innerHTML = '&#10007;';
 		setTimeout(() => {
-			formSubmitDataBtnText.textContent = 'Update';
+			formSubmitDataBtnText.textContent = 'Update Data';
 		} , 500 );
 		showAlert('error' , e.response.data.message);
 	}
@@ -257,6 +261,20 @@ formEditData.addEventListener('submit' , (e) => {
 		const email = emailInput.value;
 		updateUserData(name , email);
 	}
+});
+
+// change user profile photo:
+const previewImage = () => {
+	const photo = uploadImageInput.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(photo);
+        reader.onload = (e) => {
+            uploadImagePreview.src = e.target.result;
+        };
+}
+uploadImageInput.addEventListener('change' , previewImage);
+formEditProfile.addEventListener('submit' , (e) => {
+	
 });
 
 // change user password:
@@ -287,7 +305,7 @@ const changePassword = async (curPass , newPass) => {
 		formSubmitPassBtnText.classList.remove('spinner');
 		formSubmitPassBtnText.innerHTML = '&#10007;';
 		setTimeout(() => {
-			formSubmitPassBtnText.textContent = 'Change';
+			formSubmitPassBtnText.textContent = 'Change Password';
 		} , 500 );
 		showAlert('error' , e.response.data.message);
 	}

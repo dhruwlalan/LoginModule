@@ -36,14 +36,14 @@ block content
 							button.form__submit-btn.edit__submit-btn(type='submit')
 								span.form__submit-btn--text.edit__submitdata-btn--text Update Data
 					form.form--edit.form--edit--profile(autocomplete='off')
-						h3.edit__title Update Your Profile Image.
+						h3.edit__title Update Your Profile Photo.
 						div.form__body.edit__body
 							div.form__group__profile
 								img.form__group__profile--preview(id="uploadImagePreview" src=`/assets/images/${user.photo}`)
 								input.form__group__profile--input(id="uploadImageInput" type="file" accept="image/*")
-								label.form__group__profile--label(id="uploadImageLabel" for='uploadImageInput') select
+								label.form__group__profile--label(id="uploadImageLabel" for='uploadImageInput') Select Photo
 							button.form__submit-btn.edit__submit-btn(type='submit')
-								span.form__submit-btn--text.edit__submitdata-btn--text Update Image
+								span.form__submit-btn--text.edit__submitdata-btn--text Update Profile Photo
 			div.pipes
 				div.pipes__pipe.pipes__pipe--left
 				div.pipes__pipe.pipes__pipe--right
@@ -60,4 +60,4 @@ block content
 							label.form__group-label(id='NewPassLabel' for='passInput') New Password
 							img.form__group-input--eyesvg.eyesvgfornewpass(src='assets/svg/passShow.svg')
 						button.form__submit-btn.edit__submit-btn(type='submit')
-							span.form__submit-btn--text.edit__submitpass-btn--text Change
+							span.form__submit-btn--text.edit__submitpass-btn--text Change Password

@@ -39,14 +39,14 @@
 	box-shadow: 0 1rem 3rem rgb(0 0 0 / 25%);
 
 	&__title {
-		@include typo( $c: #002fff , $ff: $mfont , $fs: 4rem , $fw: 400 , $ta: center , );
+		@include typo( $c: #002fff , $ff: $mfont , $fs: 4rem , $fw: 500 , $ta: center , );
 	}
 
 	&__profile {
 		@include flex( $jc: center , $ai: center , );
 
 		&--name {
-			@include typo( $c: #002fff , $ff: $mfont , $fs: 4rem , $fw: 500 , $ta: center , );
+			@include typo( $c: #002fff , $ff: $mfont , $fs: 4rem , $fw: 400 , $ta: center , );
 		}
 		&--img {
 			@include size( $h: 4rem , $w: 4rem , );

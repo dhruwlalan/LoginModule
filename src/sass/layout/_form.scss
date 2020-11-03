@@ -91,7 +91,7 @@
 				display: none;
 			}
 			&--label {
-				@include size( $h: 4rem , $w: 10rem , );
+				@include size( $h: 4rem , $w: 16rem , );
 				@include bg( $c: #002fff , );
 				@include typo( $c: white , $ff: $mfont , $fs: 2rem , $fw: 300 , );
 				@include pbm( $rad: 10px , $b: none );

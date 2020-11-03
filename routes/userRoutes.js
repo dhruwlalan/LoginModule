@@ -1,6 +1,9 @@
 const router = require('express').Router();
+const multer = require('multer');
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
+
+const upload = multer({})
 
 // open routes:
 router.post('/signup' , authController.signup);

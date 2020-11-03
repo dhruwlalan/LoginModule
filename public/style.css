@@ -261,7 +261,7 @@ body {
 }
 .form__group__profile--label {
   height: 4rem;
-  width: 10rem;
+  width: 16rem;
   background: #002fff;
   color: white;
   font: 300 2rem "Roboto", sans-serif;
@@ -446,7 +446,7 @@ input:-webkit-autofill:focus::first-line {
 }
 .main__title {
   color: #002fff;
-  font: 400 4rem "Roboto", sans-serif;
+  font: 500 4rem "Roboto", sans-serif;
   text-align: center;
 }
 .main__profile {
@@ -456,7 +456,7 @@ input:-webkit-autofill:focus::first-line {
 }
 .main__profile--name {
   color: #002fff;
-  font: 500 4rem "Roboto", sans-serif;
+  font: 400 4rem "Roboto", sans-serif;
   text-align: center;
 }
 .main__profile--img {
