@@ -91,18 +91,25 @@
 			&--input {
 				display: none;
 			}
-			&--label {
-				@include size( $h: 4rem , $w: 16rem , );
-				@include bg( $c: #002fff , );
-				@include typo( $c: white , $ff: $mfont , $fs: 2rem , $fw: 300 , );
-				@include pbm( $rad: 10px , $b: none );
-				@include flex( $jc: center , $ai: center , );
+			&--links {
+				@include size( $h: 70% , $w: null , );
+				@include flex( $fd: column , $jc: space-between , $ai: start , );
+				@include disable-selection;
+			}
+			&--label , &--remove {
+				@include size( $h: 4rem , $w: null , );
+				@include typo( $c: #002fff , $ff: $mfont , $fs: 2rem , $fw: 300 , );
+				@include flex( $jc: start , $ai: center , );
+				@include pos-relative();
 				outline: none;
 				cursor: pointer;
 
-				&:hover { @include bg( $c: #002be9 , ) }
-				&:active { @include bg( $c: #002fff , ) }
-				&:focus, &:active { box-shadow: 0 0 0 4px rgb(0 49 255 / 25%) }
+				&:hover { &::after {
+					content: '';
+					@include pos-absolute( $b: 8px );
+					@include size( $h: 2px , $w: 100% , );
+					@include bg( $c: rgb(0 49 255 / 25%) , );
+				}}
 			}
 		}
 	}

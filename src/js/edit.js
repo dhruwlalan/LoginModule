@@ -31,6 +31,7 @@ const formSubmitPassBtnText = document.querySelector('.edit__submitpass-btn--tex
 const uploadImagePreview = document.getElementById('uploadImagePreview');
 const uploadImageInput = document.getElementById('uploadImageInput');
 const uploadImageLabel = document.getElementById('uploadImageLabel');
+const removeImageLabel = document.getElementById('removeImageLabel');
 
 let EnteredName = 'notEntered';
 let EnteredEmail = 'notEntered';
@@ -302,9 +303,17 @@ const uploadImage = async (form) => {
 uploadImageInput.addEventListener('change' , previewImage);
 formEditProfile.addEventListener('submit' , (e) => {
 	e.preventDefault();
-	const form = new FormData();
-	form.append('photo' , uploadImageInput.files[0]);
-	uploadImage(form);
+	const imgsrc = uploadImagePreview.getAttribute('src');
+	if (imgsrc.includes('default.png')) {
+		uploadImage({ photo: 'default.png' });
+	} else {
+		const form = new FormData();
+		form.append('photo' , uploadImageInput.files[0]);
+		uploadImage(form);
+	}
+});
+removeImageLabel.addEventListener('click' , () => {
+	uploadImagePreview.src = 'assets/images/default.png';
 });
 
 // change user password:

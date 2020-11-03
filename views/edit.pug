@@ -41,7 +41,9 @@ block content
 							div.form__group__profile
 								img.form__group__profile--preview(id="uploadImagePreview" src=`/assets/images/${user.photo}`)
 								input.form__group__profile--input(id="uploadImageInput" type="file" accept="image/*" name='photo')
-								label.form__group__profile--label(id="uploadImageLabel" for='uploadImageInput') Select Photo
+								div.form__group__profile--links
+									label.form__group__profile--remove(id='removeImageLabel') Remove Photo
+									label.form__group__profile--label(id="uploadImageLabel" for='uploadImageInput') Select New Photo
 							button.form__submit-btn.edit__submit-btn(type='submit')
 								span.form__submit-btn--text.edit__submitprofile-btn--text Update Profile Photo
 			div.pipes
