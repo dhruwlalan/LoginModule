@@ -40,10 +40,10 @@ block content
 						div.form__body.edit__body
 							div.form__group__profile
 								img.form__group__profile--preview(id="uploadImagePreview" src=`/assets/images/${user.photo}`)
-								input.form__group__profile--input(id="uploadImageInput" type="file" accept="image/*")
+								input.form__group__profile--input(id="uploadImageInput" type="file" accept="image/*" name='photo')
 								label.form__group__profile--label(id="uploadImageLabel" for='uploadImageInput') Select Photo
 							button.form__submit-btn.edit__submit-btn(type='submit')
-								span.form__submit-btn--text.edit__submitdata-btn--text Update Profile Photo
+								span.form__submit-btn--text.edit__submitprofile-btn--text Update Profile Photo
 			div.pipes
 				div.pipes__pipe.pipes__pipe--left
 				div.pipes__pipe.pipes__pipe--right

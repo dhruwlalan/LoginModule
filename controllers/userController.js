@@ -1,9 +1,38 @@
+const multer = require('multer');
+const sharp = require('sharp');
 const User = require('../models/UserModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const sendResponse = require('../utils/sendResponse');
 const APIFeatures = require('../utils/apiFeatures');
 const createSendToken = require('../utils/createSendToken');
+
+
+// Configure Muulter & Sharp:
+const multerStorage = multer.memoryStorage()
+const multerFilter = (req , file , cb) => {
+    if (file.mimetype.startsWith('image')) {
+        cb(null , true);
+    } else {
+        cb(new AppError('Not an image! Please upload only images.' , 400) , false);
+    }
+}
+const upload = multer({
+    storage: multerStorage ,
+    fileFilter: multerFilter ,
+});
+exports.uploadUserPhoto = upload.single('photo');
+exports.resizeUserPhoto = (req , res , next) => {
+    if (!req.file) return next();
+    req.file.filename = `u-${req.user.id }.jpeg`;
+    
+    sharp(req.file.buffer)
+        .resize(300 , 300)
+        .toFormat('jpeg')
+        .toFile(`public/assets/images/${req.file.filename }`);
+
+    next();
+}
 
 
 // CRUD for admin:
@@ -40,6 +69,7 @@ exports.deleteUser = catchAsync(async (req , res) => {
     sendResponse(res , 204 , null);
 });
 
+
 // UD for normal users:
 exports.updateMe = catchAsync(async (req , res , next) => {
     // 1) Create error if user POSTs password data
@@ -50,9 +80,9 @@ exports.updateMe = catchAsync(async (req , res , next) => {
     // 2) Filtered out unwanted fields names that are not allowed to be updated
     const filteredBody = {};
     Object.keys(req.body).forEach(el => {
-        if (['name', 'email'].includes(el)) filteredBody[el] = req.body[el];
+        if (['name', 'email' , 'photo'].includes(el)) filteredBody[el] = req.body[el];
     });
-
+    if (req.file) filteredBody.photo = req.file.filename;
 
     // 3) Update user document
     const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {

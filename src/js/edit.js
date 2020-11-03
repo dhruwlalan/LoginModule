@@ -26,6 +26,7 @@ const newPassLabel = document.getElementById('NewPassLabel');
 const eyeSvgForCurPass = document.querySelector('.eyesvgforcurpass');
 const eyeSvgForNewPass = document.querySelector('.eyesvgfornewpass');
 const formSubmitDataBtnText = document.querySelector('.edit__submitdata-btn--text');
+const formSubmitProfileBtnText = document.querySelector('.edit__submitprofile-btn--text');
 const formSubmitPassBtnText = document.querySelector('.edit__submitpass-btn--text');
 const uploadImagePreview = document.getElementById('uploadImagePreview');
 const uploadImageInput = document.getElementById('uploadImageInput');
@@ -266,15 +267,44 @@ formEditData.addEventListener('submit' , (e) => {
 // change user profile photo:
 const previewImage = () => {
 	const photo = uploadImageInput.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(photo);
-        reader.onload = (e) => {
-            uploadImagePreview.src = e.target.result;
-        };
+    const reader = new FileReader();
+    reader.readAsDataURL(photo);
+    reader.onload = (e) => {
+        uploadImagePreview.src = e.target.result;
+    };
 }
+const uploadImage = async (form) => {
+	formSubmitProfileBtnText.textContent = '';
+	formSubmitProfileBtnText.classList.add('spinner');
+	try {
+		const res = await axios({
+			method: 'PATCH' ,
+			url: '/api/v1/users/updateMe' ,
+			data: form ,
+		});
+		if (res.data.status === 'success') {
+			formSubmitProfileBtnText.classList.remove('spinner');
+			formSubmitProfileBtnText.innerHTML = '&#10003;';
+			showAlert('success' , 'Updated Your Profile Photo Successfully!');
+			setTimeout(() => {
+				formSubmitProfileBtnText.textContent = 'Update Profile Photo';
+			} , 1000 );
+		}
+	} catch (e) {
+		formSubmitDataBtnText.classList.remove('spinner');
+		formSubmitDataBtnText.innerHTML = '&#10007;';
+		setTimeout(() => {
+			formSubmitDataBtnText.textContent = 'Update Profile Photo';
+		} , 500 );
+		showAlert('error' , e.response.data.message);
+	}
+};
 uploadImageInput.addEventListener('change' , previewImage);
 formEditProfile.addEventListener('submit' , (e) => {
-	
+	e.preventDefault();
+	const form = new FormData();
+	form.append('photo' , uploadImageInput.files[0]);
+	uploadImage(form);
 });
 
 // change user password:
