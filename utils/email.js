@@ -1,48 +1,46 @@
 const nodemailer = require('nodemailer');
+const pug = require('pug');
+const htmlToText = require('html-to-text');
 
-// const sendEmail = async options => {
-// 	// 1. create a transporter:
-// 	const transporter = nodemailer.createTransport({
-// 		host: process.env.EMAIL_HOST ,
-// 		port: process.env.EMAIL_PORT ,
-// 		auth: {
-// 			user: process.env.EMAIL_USERNAME ,
-// 			pass: process.env.EMAIL_PASSWORD ,
-// 		} ,
-// 	});
+module.exports = class Email {
 
-// 	// 2. define the email options:
-// 	const mailOptions = {
-// 		from: 'dhruw <dhruwlalan22@gmail.com>' ,
-// 		to: options.email ,
-// 		subject: options.subject ,
-// 		text: options.message ,
-// 	}
-	
-// 	// 3. send the email:
-// 	await transporter.sendMail(mailOptions);
-// }
+	constructor (user , url) {
+		this.from = `Login-Module <${process.env.EMAIL_FROM }>`;
+		this.to = user.email;
+		this.url = url;
+	}
 
-const sendEmail = async options => {
-	// 1. create a transporter:
-	const transporter = nodemailer.createTransport({
-		service: 'gmail' ,
-		auth: {
-			user: 'dhruwlalan19@gmail.com' ,
-			pass: process.env.GMAIL_PASSWORD ,
+	transporter() {
+		if (process.env.NODE_ENV === 'production') {
+			return nodemailer.createTransport({
+				service: 'gmail' ,
+				auth: {
+					user: 'dhruwlalan19@gmail.com' ,
+					pass: process.env.GMAIL_PASSWORD ,
+				}
+			});
 		}
-	});
-
-	// 2. define the email options:
-	const mailOptions = {
-		from: 'Login-Module <dhruwlalan19@gmail.com>' ,
-		to: options.email ,
-		subject: options.subject ,
-		text: options.message ,
+		return nodemailer.createTransport({
+			host: process.env.EMAIL_HOST ,
+			port: process.env.EMAIL_PORT ,
+			auth: {
+				user: process.env.EMAIL_USERNAME ,
+				pass: process.env.EMAIL_PASSWORD ,
+			} ,
+		});
 	}
 	
-	// 3. send the email:
-	await transporter.sendMail(mailOptions);
+	async send () {
+		const html = pug.renderFile(`${__dirname }/../views/resetPasswordEmail.pug` , {
+			url: this.url ,
+		});
+		const mailOptions = {
+			from: this.from ,
+			to: this.to ,
+			subject: 'Your password reset token (valid for 10 min)' ,
+			html ,
+			text: htmlToText.fromString(html) ,
+		}
+		await this.transporter().sendMail(mailOptions);
+	}
 }
-
-module.exports = sendEmail;
