@@ -1,0 +1,32 @@
+@use "../../abstracts" as *;
+
+.form {
+	@include size( $h: 50rem , $maxw: 40rem , );
+	@include flex( $fd: column , );
+	@include pos-relative();
+	overflow: hidden;
+
+	&--login , &--signup , &--forget-password , &--reset-password {
+		@include bg( $c: $background , );
+		@include pbm( $rad: 1rem , $m: 0 auto , $mt: 10rem , );
+		box-shadow: 0 0 6rem 1rem rgb(0 0 0 / 25%);
+
+		@media (max-width: 450px) {
+			@include size( $h: 115vw , );
+			@include pbm( $mt: 0 , );
+		}
+	}
+	&--forget-password , &--reset-password { 
+		@include size( $h: fit-content , ); 
+	}
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+	-webkit-text-fill-color: #002fff;
+	transition: background-color 10000000s ease-in-out 0s;
+	&::first-line {
+		 @include typo( $c: #002fff , $ff: $mfont , $fs: 2rem , $fw: 400 , );	
+	}
+}

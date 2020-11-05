@@ -2,7 +2,8 @@
 import './assets.js';
 
 // MAIN
-import showAlert from './alerts.js';
+import axios from 'axios';
+import showAlert from './views/alerts.js';
 import validator from 'validator';
 
 const form = document.querySelector('.form');

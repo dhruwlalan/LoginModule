@@ -2,11 +2,12 @@
 import './assets.js';
 
 // MAIN
-import showAlert from './alerts.js';
+import axios from 'axios';
 import validator from 'validator';
+import logoutModel from './models/logoutModel.js';
+import showAlert from './views/alerts.js';
+import dom from './views/dom.js';
 
-const home = document.getElementById('home');
-const logout = document.getElementById('logout');
 const formEditData = document.querySelector('.form--edit--data');
 const formEditProfile = document.querySelector('.form--edit--profile');
 const formEditPass = document.querySelector('.form--edit--pass');
@@ -38,23 +39,8 @@ let EnteredEmail = 'notEntered';
 let EnteredCurPass = 'notEntered';
 let EnteredNewPass = 'notEntered';
 
-const logUserOut = async (loc) => {
-	try {
-		const res = await axios({
-			method: 'GET' ,
-			url: '/api/v1/users/logout' ,
-		});
-		if (res.data.status === 'success') {
-			location.assign(`/${loc }`);
-		}
-	} catch (e) {
-		showAlert('error' , e);
-	}
-}
-home.addEventListener('click' , () => {
-	location.assign('/home');
-});
-logout.addEventListener('click' , logUserOut);
+dom.home.addEventListener('click' , () => { location.assign('/') });
+dom.logout.addEventListener('click' , logoutModel);
 
 // for focus:
 formGroupInputs.forEach((input) => {
@@ -336,8 +322,8 @@ const changePassword = async (curPass , newPass) => {
 			curPassInput.value = '';
 			newPassInput.value = '';
 			setTimeout(() => {
-				logUserOut('login');
-			} , 1000 );
+				logoutModel('login');
+			} , 500 );
 		}
 	} catch (e) {
 		formSubmitPassBtnText.classList.remove('spinner');

@@ -1,0 +1,18 @@
+@use "../../abstracts" as *;
+
+.form__header {
+	&--back {
+		@include size( $h: 2.5rem , $w: 2.5rem , );
+		@include pos-absolute( $t: 2.6rem , $l: 2.2rem , );
+		fill: $pri-blue;
+	}
+	&--title {
+		@include size( $minh: 4rem , $w: 100% , );
+		@include typo( $c: $pri-blue , $ff: $roboto , $fs: 3rem , $fw: 600 , $ta: center , );
+		@include pbm( $mt: 2rem , $p: 0 7rem , );
+	}
+	&--subtitle {
+		@include typo( $c: $sec-blue , $ff: $roboto , $fs: 1.6rem , $fw: 400 , $ta: center , );
+		@include pbm( $m: 1rem 0 , $p: 0 1rem , );
+	}
+}
