@@ -6,6 +6,7 @@ const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 const AppError = require('./utils/appError');
 const errorController = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
@@ -47,6 +48,9 @@ const whitelist = { whitelist: [
 	'age' ,
 ]};
 app.use( hpp(whitelist) );
+
+// 7. Compressing requests and responses:
+app.use( compression() );
 
 // 7. Define Routers:
 app.use( '/api/v1/users' , userRouter );

@@ -6,7 +6,8 @@
     "author": "dhruw",
     "license": "MIT",
     "scripts": {
-        "start": "webpack-dev-server --config configs/webpack.start.js --open",
+        "start": "node server.js",
+        "startWebpack": "webpack-dev-server --config configs/webpack.start.js --open",
         "dev": "webpack --config configs/webpack.dev.js",
         "dev:watch": "webpack --config configs/webpack.dev.js --watch",
         "prod": "webpack --config configs/webpack.prod.js",
@@ -16,6 +17,7 @@
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
+        "compression": "^1.7.4",
         "cookie-parser": "^1.4.5",
         "cross-env": "^7.0.2",
         "dotenv": "^8.2.0",
@@ -55,6 +57,6 @@
         "webpack-dev-server": "^3.11.0"
     },
     "engins": {
-        "node": ">=10.0.0"
+        "node": "^10.0.0"
     }
 }

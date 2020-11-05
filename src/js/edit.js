@@ -51,7 +51,6 @@ const logUserOut = async (loc) => {
 		showAlert('error' , e);
 	}
 }
-
 home.addEventListener('click' , () => {
 	location.assign('/home');
 });
@@ -122,12 +121,12 @@ eyeSvgForCurPass.addEventListener('click' , () => {
 	if (curPassInput.getAttribute('type') === 'password') {
 		curPassInput.setAttribute('type' , 'text');
 		curPassInput.classList.add('form__group-input--showpassword');
-		eyeSvgForCurPass.setAttribute('src' , 'assets/svg/passHide.svg');
+		eyeSvgForCurPass.setAttribute('src' , '/assets/svg/passHide.svg');
 		eyeSvgForCurPass.style.display = 'inline-block';
 	} else {
 		curPassInput.setAttribute('type' , 'password');
 		curPassInput.classList.remove('form__group-input--showpassword');
-		eyeSvgForCurPass.setAttribute('src' , 'assets/svg/passShow.svg');
+		eyeSvgForCurPass.setAttribute('src' , '/assets/svg/passShow.svg');
 		eyeSvgForCurPass.removeAttribute('style');
 	}
 });
@@ -135,12 +134,12 @@ eyeSvgForNewPass.addEventListener('click' , () => {
 	if (newPassInput.getAttribute('type') === 'password') {
 		newPassInput.setAttribute('type' , 'text');
 		newPassInput.classList.add('form__group-input--showpassword');
-		eyeSvgForNewPass.setAttribute('src' , 'assets/svg/passHide.svg');
+		eyeSvgForNewPass.setAttribute('src' , '/assets/svg/passHide.svg');
 		eyeSvgForNewPass.style.display = 'inline-block';
 	} else {
 		newPassInput.setAttribute('type' , 'password');
 		newPassInput.classList.remove('form__group-input--showpassword');
-		eyeSvgForNewPass.setAttribute('src' , 'assets/svg/passShow.svg');
+		eyeSvgForNewPass.setAttribute('src' , '/assets/svg/passShow.svg');
 		eyeSvgForNewPass.removeAttribute('style');
 	}
 });
@@ -313,7 +312,7 @@ formEditProfile.addEventListener('submit' , (e) => {
 	}
 });
 removeImageLabel.addEventListener('click' , () => {
-	uploadImagePreview.src = 'assets/images/default.png';
+	uploadImagePreview.src = '/assets/images/default.png';
 });
 
 // change user password:

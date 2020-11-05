@@ -96,12 +96,12 @@ eyeSvg.addEventListener('click' , () => {
 	if (passInput.getAttribute('type') === 'password') {
 		passInput.setAttribute('type' , 'text');
 		passInput.classList.add('form__group-input--showpassword');
-		eyeSvg.setAttribute('src' , 'assets/svg/passHide.svg');
+		eyeSvg.setAttribute('src' , '/assets/svg/passHide.svg');
 		eyeSvg.style.display = 'inline-block';
 	} else {
 		passInput.setAttribute('type' , 'password');
 		passInput.classList.remove('form__group-input--showpassword');
-		eyeSvg.setAttribute('src' , 'assets/svg/passShow.svg');
+		eyeSvg.setAttribute('src' , '/assets/svg/passShow.svg');
 		eyeSvg.removeAttribute('style');
 	}
 });
