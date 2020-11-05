@@ -7,6 +7,7 @@ const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 const AppError = require('./utils/appError');
 const errorController = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
@@ -23,7 +24,18 @@ app.use( express.static(path.join(__dirname , 'public')) );
 /* -- GLOBAL MIDDLEWARES -- */
 
 // 1. Set security HTTP headers:
-// app.use( helmet() );
+app.use( cors() );
+app.options('*' , cors());
+app.use( helmet() );
+app.use( helmet.contentSecurityPolicy({
+	directives: {
+		defaultSrc: ["'self'", 'https:', 'http:', 'data:', 'ws:'],
+		baseUri: ["'self'"],
+		fontSrc: ["'self'", 'https:', 'http:', 'data:'],
+		scriptSrc: ["'self' 'unsafe-eval'", 'https:', 'http:', 'blob:'],
+		styleSrc: ["'self'", "'unsafe-inline'", 'https:', 'http:'],
+	},
+}));
 
 // 2. Limit requests from same API:
 const limiter = rateLimit({

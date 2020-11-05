@@ -5,7 +5,7 @@ const htmlToText = require('html-to-text');
 module.exports = class Email {
 
 	constructor (user , url) {
-		this.from = `Login-Module <${process.env.EMAIL_FROM }>`;
+		this.from = `Login-Module-dl <${process.env.EMAIL_FROM }>`;
 		this.to = user.email;
 		this.url = url;
 	}
@@ -31,7 +31,6 @@ module.exports = class Email {
 			html ,
 			text: htmlToText.fromString(html) ,
 		}
-		console.log('before send mail');
 		await this.transporter().sendMail(mailOptions);
 	}
 }
