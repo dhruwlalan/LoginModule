@@ -31,6 +31,7 @@ module.exports = class Email {
 			html ,
 			text: htmlToText.fromString(html) ,
 		}
+		console.log('before send mail');
 		await this.transporter().sendMail(mailOptions);
 	}
 }

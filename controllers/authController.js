@@ -16,7 +16,7 @@ exports.signup = catchAsync(async (req , res , next) => {
 		passwordConfirm: req.body.passwordConfirm ,
 		role: req.body.role ,
 	});
-	createSendToken(newUser , 201 , res);
+	createSendToken(newUser , 201 , req , res);
 });
 exports.login = catchAsync(async (req , res , next) => {
 	const { email , password } = req.body;
@@ -32,7 +32,7 @@ exports.login = catchAsync(async (req , res , next) => {
 	}
 
 	// legit user... send token:
-	createSendToken(user, 200, res);
+	createSendToken(user , 200 , req , res);
 });
 exports.logout = catchAsync(async (req , res , next) => {
 	res.cookie( 'jwt' , 'loggedOut' , {
@@ -62,6 +62,7 @@ exports.forgetPassword = catchAsync(async (req , res , next) => {
 			message: 'Token sent to email!' ,
 		});
 	} catch (e) {
+		console.log(e);
 		user.PasswordResetToken = undefined;
 		user.PasswordResetExpired = undefined;
 		await user.save({ validateBeforeSave: false });
@@ -85,7 +86,7 @@ exports.resetPassword = catchAsync(async (req , res , next) => {
 
 	// 3. update changedPasswordAt property fot the user:
 	// 4. log the user in, send jwt:
-	createSendToken(user, 200, res);
+	createSendToken(user, 200, req , res);
 });
 
 // Global middleware for checking if the user is logged in:

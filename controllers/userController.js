@@ -107,7 +107,7 @@ exports.updatePassword = catchAsync(async (req , res , next) => {
     await user.save();
 
     // 4. log user in, send jwt:
-    createSendToken(user, 200, res);
+    createSendToken(user , 200 , req , res);
 });
 exports.deleteMe = catchAsync(async (req , res , next) => {
     await User.findByIdAndUpdate(req.user.id, { active: false });
