@@ -12,4 +12,10 @@
 	@media (max-width: 450px) {
 		@include pbm( $p: 2rem 1rem , );
 	}
+
+	&--edit {
+		@media (max-width: 450px) {
+			@include pbm( $p: 0 , $pt: 1rem , );
+		}
+	}
 }

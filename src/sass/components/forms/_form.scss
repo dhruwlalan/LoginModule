@@ -19,6 +19,10 @@
 	&--forget-password , &--reset-password { 
 		@include size( $h: fit-content , ); 
 	}
+	&--edit--data , &--edit--profile , &--edit--pass {
+		@include size( $h: auto , $maxw: 40rem , );
+		@include pbm( $m: 0 auto , );
+	}
 }
 
 input:-webkit-autofill,
