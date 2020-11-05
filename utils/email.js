@@ -11,22 +11,12 @@ module.exports = class Email {
 	}
 
 	transporter() {
-		if (process.env.NODE_ENV === 'production') {
-			return nodemailer.createTransport({
-				service: 'gmail' ,
-				auth: {
-					user: 'dhruwlalan19@gmail.com' ,
-					pass: process.env.GMAIL_PASSWORD ,
-				}
-			});
-		}
 		return nodemailer.createTransport({
-			host: process.env.EMAIL_HOST ,
-			port: process.env.EMAIL_PORT ,
+			service: 'gmail' ,
 			auth: {
-				user: process.env.EMAIL_USERNAME ,
-				pass: process.env.EMAIL_PASSWORD ,
-			} ,
+				user: 'dhruwlalan19@gmail.com' ,
+				pass: process.env.GMAIL_PASSWORD ,
+			}
 		});
 	}
 	
