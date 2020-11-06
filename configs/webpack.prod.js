@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -7,7 +6,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
 	mode: 'production' ,
-	entry: { index: path.resolve(__dirname, '../src/js/index.js') } ,
+	entry: { 
+		signup: path.resolve(__dirname, '../src/js/signup.js') ,
+		login: path.resolve(__dirname, '../src/js/login.js') ,
+		home: path.resolve(__dirname, '../src/js/home.js') ,
+		forgetPassword: path.resolve(__dirname, '../src/js/forgetPassword.js') ,
+		resetPassword: path.resolve(__dirname, '../src/js/resetPassword.js') ,
+		edit: path.resolve(__dirname, '../src/js/edit.js') ,
+	} ,
 	output: {
 		filename: '[name].[contentHash].bundle.js' ,
 		path: path.resolve(__dirname, '../public') ,
@@ -69,11 +75,6 @@ module.exports = {
 		] ,
 	} ,
 	plugins: [
-		new HtmlWebpackPlugin({ 
-			filename: 'index.html' ,
-			template: path.resolve(__dirname, '../src', 'index.html') ,
-			chunks: ['index'] ,
-		}) ,
 		new MiniCssExtractPlugin({ filename: 'style.[contentHash].css' }) ,
 		new CleanWebpackPlugin() ,
 	] ,
