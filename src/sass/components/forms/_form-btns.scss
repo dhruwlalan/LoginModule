@@ -1,14 +1,14 @@
 @use "../../abstracts" as *;
+@use "../../abstracts/placeholder" as *;
 
 .btn {
 	@include size( $h: 5rem , $w: 100% , );
-	@include bg( $c: $pri-blue ,  );
+	@extend %blue-bgc;
 	@include typo( $c: $white , $ff: $roboto , $fs: 2rem , $fw: 300 , );
 	@include pbm( $rad: 10px , $b: none , );
-	@include flex( $jc: center , $ai: center , );
-	@include disable-selection;
-	outline: none;
-	cursor: pointer;
+	@extend %flex-center;
+	@extend %disable-selection;
+	@extend %cur-out;
 
 	&:hover { @include bg( $c: $hov-blue ) }
 	&:active { @include bg( $c: $pri-blue ) }

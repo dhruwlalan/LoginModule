@@ -1,15 +1,16 @@
 @use "../../abstracts" as *;
+@use "../../abstracts/placeholder" as *;
 
 .form__footer {
 	@include typo( $c: $white , $ff: $roboto , $fs: 1.5rem , $fw: 300 , $ta: center , );
 	@include pbm( $mb: 1.5rem , );
-	@include disable-selection;
+	@extend %disable-selection;
 	z-index: 10;
 
 	&--link {
 		@include typo( $c: $pri-green , $ff: $roboto , $fs: 1.5rem , $fw: 600 , $td: none , );
 		@include pos-relative();
-		cursor: pointer;
+		@extend %cur-out;
 
 		&:hover::after , &:focus::after {
 			content: '';
@@ -21,8 +22,8 @@
 	}
 
 	&--svg {
+		@include pbm( $rad: 0 0 1rem 1rem , );
 		@include pos-absolute( $b: 0 , $l: 0 , );
 		fill: $pri-blue;
-		border-radius: 0 0 1rem 1rem;
 	}
 }

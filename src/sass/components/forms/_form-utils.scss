@@ -1,4 +1,5 @@
 @use "../../abstracts" as *;
+@use "../../abstracts/placeholder" as *;
 
 .showeyesvg { display: inline-block !important; }
 .focus-input , .hover-input { border: 1px solid $error; }
@@ -6,10 +7,10 @@
 
 .eye-svg {
 	@include size( $h: 2rem , );
-	@include disable-selection;
+	@extend %disable-selection;
 	@include pos-absolute( $t: 50% , $r: 1rem , );
+	@extend %cur-out;
 	transform: translateY( -50% );
-	cursor: pointer;
 	filter: invert(28%) sepia(100%) saturate(3433%) hue-rotate(207deg) brightness(103%) contrast(101%);
 	display: none;
 }

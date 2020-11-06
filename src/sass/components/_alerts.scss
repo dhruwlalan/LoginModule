@@ -1,11 +1,12 @@
 @use "../abstracts" as *;
+@use "../abstracts/placeholder" as *;
 
 .alert {
 	@include size( $w: 40rem , );
 	@include pos-fixed( $t: 0 , $l: 0 , $r: 0 , $z: 100 , );
 	@include pbm( $m: 0 auto , $rad: 0 0 1rem 1rem , $p: 2rem 1rem , );
-	@include typo( $ff: $mfont , $fs: 1.6rem , $fw: 500 , $ta: center , );
-	@include disable-selection;
+	@include typo( $ff: $roboto , $fs: 1.6rem , $fw: 500 , $ta: center , );
+	@extend %disable-selection;
 	box-shadow: 0 0 4rem 1rem rgb(0 0 0 / 25%);
 
 	@media (max-width: 450px) {
@@ -31,14 +32,8 @@
   to { visibility: hidden; transform: translate3d(0, -100%, 0); }
 }
 .slideInDown {
-	animation-timing-function: ease;
-	animation-duration: .5s;
-	animation-fill-mode: both;
-	animation-name: slideInDown;
+	animation: slideInDown .5s ease both;
 }
 .slideOutUp {
-	animation-timing-function: ease-in;
-	animation-duration: .3s;
-	animation-fill-mode: both;
-	animation-name: slideOutUp;
+	animation: slideOutUp .3s ease-in both;
 }

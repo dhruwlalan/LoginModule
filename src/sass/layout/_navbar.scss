@@ -1,16 +1,17 @@
 @use "../abstracts" as *;
+@use "../abstracts/placeholder" as *;
 
 .navbar {
 	@include size( $h: 5rem , $w: 100% , );
-	@include bg( $c: $background , );
+	@extend %white-bgc;
 	@include pbm( $rad: 1rem , $p: 0 2rem , );
 	@include flex( $jc: space-between , $ai: center , );
 	box-shadow: 0 0 4rem rgb(0 0 0 / 25%);
-	@include disable-selection;
+	@extend %disable-selection;
 
 	&__link {
 		@include flex( $ai: center , );
-		cursor: pointer;
+		@extend %cur-out;
 
 		&#edit:hover &--text { transform: translateX( 1px ); }
 		&#edit:hover &--svgbox { transform: translateX( -1px ); }

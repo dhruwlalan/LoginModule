@@ -1,13 +1,14 @@
 @use "../../abstracts" as *;
+@use "../../abstracts/placeholder" as *;
 
 .form__body {
 	@include flex-item( $grow: 1 , );
-	padding: 2rem;
+	@include pbm( $p: 2rem , );
 }
 .form__forget-password {
 	@include typo( $c: $sec-blue , $ff: $roboto , $fs: 1.6rem , $fw: 300 , $td: none , );
-	@include disable-selection;
-	outline: none;
+	@extend %disable-selection;
+	@extend %cur-out;
 	&:hover, &:focus { border-bottom: 2px solid $sec-foc-blue; }
 }
 .form__group {
@@ -19,24 +20,21 @@
 	&-input {
 		@include size( $h: 5rem , $w: 100% , );
 		@include bg( $c: inherit , );
-		@include typo( $c: #000aff , $ff: $roboto , $fs: 2rem , $fw: 400 , );
+		@include typo( $c: $pri-blue , $ff: $roboto , $fs: 2rem , $fw: 400 , );
 		@include pbm( $b: none , $p: 1rem 1.5rem , );
+		@extend %cur-out;
 		caret-color: $pri-gray;
-		outline: none;
 
-		&#passInput {
-			@include size( $w: 90% , );
-			@include typo( $ff: $roboto );
-		}
+		&#passInput { @include size( $w: 90% , ); }
 	}
 
 	&-label {
 		@include typo( $c: $pri-gray , $ff: $roboto , $fs: 1.2rem , $fw: 400 , );
-		@include bg( $c: $background , );
+		@extend %white-bgc;
 		@include pbm( $p: 0rem 5px , $rad: 50px , );
 		@include pos-absolute( $l: 1.5rem , $t: 0px , $z: 10 , );
 		transform: translateY( -9px );
-		@include disable-selection;
+		@extend %disable-selection;
 
 		@media (max-width: 550px) {
 			transform: translateY( -7px );
@@ -46,8 +44,8 @@
 	&__profile {
 		@include size( $h: 12.5rem , $w: 100% , );
 		@include pbm( $mb: 2.5rem , );
-		@include flex( $jc: center , $ai: center , );
-		@include disable-selection;
+		@extend %flex-center;
+		@extend %disable-selection;
 
 		&--input { display: none; }
 		&--preview {
@@ -58,7 +56,7 @@
 		&--links {
 			@include size( $h: 70% , );
 			@include flex( $fd: column , $jc: space-between , $ai: start , );
-			@include disable-selection;
+			@extend %disable-selection;
 
 			@media (max-width: 450px) {
 				justify-content: space-evenly;
@@ -69,8 +67,7 @@
 			@include typo( $c: $pri-blue , $ff: $roboto , $fs: 2rem , $fw: 300 , );
 			@include flex( $jc: start , $ai: center , );
 			@include pos-relative();
-			outline: none;
-			cursor: pointer;
+			@extend %cur-out;
 
 			@media (max-width: 450px) {
 				height: 3rem;
@@ -79,9 +76,9 @@
 
 			&:hover { &::after {
 				content: '';
-				@include pos-absolute( $b: 8px );
 				@include size( $h: 2px , $w: 100% , );
 				@include bg( $c: $foc-blue , );
+				@include pos-absolute( $b: 8px );
 			}}
 		}
 	}
