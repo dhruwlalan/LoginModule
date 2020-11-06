@@ -22,7 +22,7 @@
 		@include bg( $c: inherit , );
 		@include typo( $c: $pri-blue , $ff: $roboto , $fs: 2rem , $fw: 400 , );
 		@include pbm( $b: none , $p: 1rem 1.5rem , );
-		@extend %cur-out;
+		outline: none;
 		caret-color: $pri-gray;
 
 		&#passInput { @include size( $w: 90% , ); }

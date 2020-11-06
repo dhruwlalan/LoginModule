@@ -1,31 +1,19 @@
 // ASSETS
 import './assets.js';
 
-// MAIN
+// EXTERNALS
 import axios from 'axios';
-import showAlert from './views/alerts.js';
 import validator from 'validator';
+import showAlert from './views/alerts.js';
+import dom from './views/dom.js';
 
-const form = document.querySelector('.form');
-const formGroupName = document.querySelector('.form__group--name');
-const formGroupEmail = document.querySelector('.form__group--email');
-const formGroupPass = document.querySelector('.form__group--pass');
-const formGroupInputs = document.querySelectorAll('.form__group-input');
-const nameInput	= document.getElementById('nameInput');
-const namelabel = document.getElementById('nameLabel');
-const emailInput = document.getElementById('emailInput');
-const emailLabel = document.getElementById('emailLabel');
-const passInput = document.getElementById('passInput');
-const passLabel = document.getElementById('passLabel');
-const eyeSvg = document.querySelector('.form__group-input--eyesvg');
-const formSubmitBtnText = document.querySelector('.form__submit-btn--text');
-
+// CODE
 let EnteredName = 'notEntered';
 let EnteredEmail = 'notEntered';
 let EnteredPass = 'notEntered';
 
 // for focus:
-formGroupInputs.forEach((input) => {
+dom.formGroupInputs.forEach((input) => {
 	input.addEventListener('focusin' , (e) => {
 		e.target.parentNode.classList.add('focus-input');
 		e.target.parentNode.querySelector(':scope > label').classList.add('focus-label');
@@ -36,108 +24,108 @@ formGroupInputs.forEach((input) => {
 	});
 });
 // for hover:
-formGroupName.addEventListener('mouseenter' , () => {
-	const name = nameInput.value;
+dom.formGroupName.addEventListener('mouseenter' , () => {
+	const name = dom.nameInput.value;
 	if (name.length === 0) {
-		formGroupName.classList.add('hover-input');
-		nameLabel.classList.add('hover-label');
+		dom.formGroupName.classList.add('hover-input');
+		dom.nameLabel.classList.add('hover-label');
 	}
 });
-formGroupName.addEventListener('mouseleave' , () => {
-	formGroupName.classList.remove('hover-input');
-	nameLabel.classList.remove('hover-label');
+dom.formGroupName.addEventListener('mouseleave' , () => {
+	dom.formGroupName.classList.remove('hover-input');
+	dom.nameLabel.classList.remove('hover-label');
 });
-formGroupEmail.addEventListener('mouseenter' , () => {
-	const email = emailInput.value;
+dom.formGroupEmail.addEventListener('mouseenter' , () => {
+	const email = dom.emailInput.value;
 	if (email.length === 0) {
-		formGroupEmail.classList.add('hover-input');
-		emailLabel.classList.add('hover-label');
+		dom.formGroupEmail.classList.add('hover-input');
+		dom.emailLabel.classList.add('hover-label');
 	}
 });
-formGroupEmail.addEventListener('mouseleave' , () => {
-	formGroupEmail.classList.remove('hover-input');
-	emailLabel.classList.remove('hover-label');
+dom.formGroupEmail.addEventListener('mouseleave' , () => {
+	dom.formGroupEmail.classList.remove('hover-input');
+	dom.emailLabel.classList.remove('hover-label');
 });
-formGroupPass.addEventListener('mouseenter' , () => {
-	const password = passInput.value;
+dom.formGroupPass.addEventListener('mouseenter' , () => {
+	const password = dom.passInput.value;
 	if (password.length === 0) {
-		formGroupPass.classList.add('hover-input');
-		passLabel.classList.add('hover-label');
+		dom.formGroupPass.classList.add('hover-input');
+		dom.passLabel.classList.add('hover-label');
 	}
-	eyeSvg.classList.add('showeyesvg');
+	dom.eyeSvgForPass.classList.add('showeyesvg');
 });
-formGroupPass.addEventListener('mouseleave' , () => {
-	formGroupPass.classList.remove('hover-input');
-	passLabel.classList.remove('hover-label');
-	eyeSvg.classList.remove('showeyesvg');
+dom.formGroupPass.addEventListener('mouseleave' , () => {
+	dom.formGroupPass.classList.remove('hover-input');
+	dom.passLabel.classList.remove('hover-label');
+	dom.eyeSvgForPass.classList.remove('showeyesvg');
 });
 
 // checking input:
-nameInput.addEventListener('input' , () => {
-	const name = nameInput.value;
+dom.nameInput.addEventListener('input' , () => {
+	const name = dom.nameInput.value;
 	if (name.length === 0) {
 		EnteredName = 'notEntered';
-		formGroupName.removeAttribute('style');
-		namelabel.removeAttribute('style');
+		dom.formGroupName.removeAttribute('style');
+		dom.nameLabel.removeAttribute('style');
 	} else {
 		EnteredName = 'EnteredAndValid';
-		formGroupName.style.border = '1px solid #002fff';
-		namelabel.style.color = '#002fff';
+		dom.formGroupName.style.border = '1px solid #002fff';
+		dom.nameLabel.style.color = '#002fff';
 	}
 });
-emailInput.addEventListener('input' , () => {
-	const email = emailInput.value;
+dom.emailInput.addEventListener('input' , () => {
+	const email = dom.emailInput.value;
 	if (email.length === 0) {
 		EnteredEmail = 'notEntered';
-		formGroupEmail.removeAttribute('style');
-		emailLabel.removeAttribute('style');
+		dom.formGroupEmail.removeAttribute('style');
+		dom.emailLabel.removeAttribute('style');
 	} else if (validator.isEmail(email)) {
 		EnteredEmail = 'EnteredAndValid';
-		formGroupEmail.style.border = '1px solid #002fff';
-		emailLabel.style.color = '#002fff';
+		dom.formGroupEmail.style.border = '1px solid #002fff';
+		dom.emailLabel.style.color = '#002fff';
 	} else {
 		EnteredEmail = 'EnteredButInvalid';
-		formGroupEmail.style.border = '1px solid tomato';
-		emailLabel.style.color = 'tomato';
+		dom.formGroupEmail.style.border = '1px solid tomato';
+		dom.emailLabel.style.color = 'tomato';
 	}
 });
-passInput.addEventListener('input' , () => {
-	const password = passInput.value;
+dom.passInput.addEventListener('input' , () => {
+	const password = dom.passInput.value;
 	const passwordLength = password.length;
 	if (passwordLength === 0) {
 		EnteredPass = 'notEntered';
-		formGroupPass.removeAttribute('style');
-		passLabel.removeAttribute('style');
+		dom.formGroupPass.removeAttribute('style');
+		dom.passLabel.removeAttribute('style');
 	} else if (passwordLength > 7) {
 		EnteredPass = 'EnteredAndValid';
-		formGroupPass.style.border = '1px solid #002fff';
-		passLabel.style.color = '#002fff';
+		dom.formGroupPass.style.border = '1px solid #002fff';
+		dom.passLabel.style.color = '#002fff';
 	} else {
 		EnteredPass = 'EnteredButInvalid';
-		formGroupPass.style.border = '1px solid tomato';
-		passLabel.style.color = 'tomato';
+		dom.formGroupPass.style.border = '1px solid tomato';
+		dom.passLabel.style.color = 'tomato';
 	}
 });
 
 // show hide password:
-eyeSvg.addEventListener('click' , () => {
-	if (passInput.getAttribute('type') === 'password') {
-		passInput.setAttribute('type' , 'text');
-		passInput.classList.add('form__group-input--showpassword');
-		eyeSvg.setAttribute('src' , '/assets/svg/passHide.svg');
-		eyeSvg.style.display = 'inline-block';
+eyeSvgForPass.addEventListener('click' , () => {
+	if (dom.passInput.getAttribute('type') === 'password') {
+		dom.passInput.setAttribute('type' , 'text');
+		dom.passInput.classList.add('form__group-input--showpassword');
+		dom.eyeSvgForPass.setAttribute('src' , '/assets/svg/passHide.svg');
+		dom.eyeSvgForPass.style.display = 'inline-block';
 	} else {
-		passInput.setAttribute('type' , 'password');
-		passInput.classList.remove('form__group-input--showpassword');
-		eyeSvg.setAttribute('src' , '/assets/svg/passShow.svg');
-		eyeSvg.removeAttribute('style');
+		dom.passInput.setAttribute('type' , 'password');
+		dom.passInput.classList.remove('form__group-input--showpassword');
+		dom.eyeSvgForPass.setAttribute('src' , '/assets/svg/passShow.svg');
+		dom.eyeSvgForPass.removeAttribute('style');
 	}
 });
 
 // signup user:
 const signup = async (name , email , password) => {
-	formSubmitBtnText.textContent = '';
-	formSubmitBtnText.classList.add('spinner');
+	dom.btnSignupText.textContent = '';
+	dom.btnSignupText.classList.add('spinner');
 	try {
 		const res = await axios({
 			method: 'POST' ,
@@ -150,23 +138,23 @@ const signup = async (name , email , password) => {
 			}
 		});
 		if (res.data.status === 'success') {
-			formSubmitBtnText.classList.remove('spinner');
-			formSubmitBtnText.innerHTML = '&#10003;';
+			dom.btnSignupText.classList.remove('spinner');
+			dom.btnSignupText.innerHTML = '&#10003;';
 			showAlert('success' , 'Created User Successfully!')
 			setTimeout(() => {
 				location.assign('/');
 			} , 500 );
 		}
 	} catch (e) {
-		formSubmitBtnText.classList.remove('spinner');
-		formSubmitBtnText.innerHTML = '&#10007;';
+		dom.btnSignupText.classList.remove('spinner');
+		dom.btnSignupText.innerHTML = '&#10007;';
 		setTimeout(() => {
-			formSubmitBtnText.textContent = 'Create Account';
+			dom.btnSignupText.textContent = 'Create Account';
 		} , 500 );
 		showAlert('error' , e.response.data.message);
 	}
 };
-form.addEventListener('submit' , (e) => {
+dom.formSignup.addEventListener('submit' , (e) => {
 	e.preventDefault();
 	if (EnteredName === 'notEntered') {
 		showAlert('error' , 'Please enter your full name.');
@@ -179,9 +167,9 @@ form.addEventListener('submit' , (e) => {
 	} else if (EnteredPass === 'EnteredButInvalid') {
 		showAlert('error' , 'Password should be at least 8 characters long.');
 	} else {
-		const name = nameInput.value;
-		const email = emailInput.value;
-		const password = passInput.value;
+		const name = dom.nameInput.value;
+		const email = dom.emailInput.value;
+		const password = dom.passInput.value;
 		signup(name , email , password);
 	}
 });

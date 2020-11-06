@@ -1,22 +1,17 @@
 // ASSETS
 import './assets.js';
 
-// MAIN
+// EXTERNALS
 import axios from 'axios';
-import showAlert from './views/alerts.js';
 import validator from 'validator';
+import showAlert from './views/alerts.js';
+import dom from './views/dom.js';
 
-const form = document.querySelector('.form');
-const formGroupEmail = document.querySelector('.form__group--email');
-const formGroupInputs = document.querySelectorAll('.form__group-input');
-const emailInput = document.getElementById('emailInput');
-const emailLabel = document.getElementById('emailLabel');
-const formSubmitBtnText = document.querySelector('.form__submit-btn--text');
-
+// CODE
 let EnteredEmail = 'notEntered';
 
 // for focus:
-formGroupInputs.forEach((input) => {
+dom.formGroupInputs.forEach((input) => {
 	input.addEventListener('focusin' , (e) => {
 		e.target.parentNode.classList.add('focus-input');
 		e.target.parentNode.querySelector(':scope > label').classList.add('focus-label');
@@ -27,40 +22,40 @@ formGroupInputs.forEach((input) => {
 	});
 });
 // for hover:
-formGroupEmail.addEventListener('mouseenter' , () => {
-	const email = emailInput.value;
+dom.formGroupEmail.addEventListener('mouseenter' , () => {
+	const email = dom.emailInput.value;
 	if (email.length === 0) {
-		formGroupEmail.classList.add('hover-input');
-		emailLabel.classList.add('hover-label');
+		dom.formGroupEmail.classList.add('hover-input');
+		dom.emailLabel.classList.add('hover-label');
 	}
 });
-formGroupEmail.addEventListener('mouseleave' , () => {
-	formGroupEmail.classList.remove('hover-input');
-	emailLabel.classList.remove('hover-label');
+dom.formGroupEmail.addEventListener('mouseleave' , () => {
+	dom.formGroupEmail.classList.remove('hover-input');
+	dom.emailLabel.classList.remove('hover-label');
 });
 
 // checking input:
-emailInput.addEventListener('input' , () => {
+dom.emailInput.addEventListener('input' , () => {
 	const email = emailInput.value;
 	if (email.length === 0) {
 		EnteredEmail = 'notEntered';
-		formGroupEmail.removeAttribute('style');
-		emailLabel.removeAttribute('style');
+		dom.formGroupEmail.removeAttribute('style');
+		dom.emailLabel.removeAttribute('style');
 	} else if (validator.isEmail(email)) {
 		EnteredEmail = 'EnteredAndValid';
-		formGroupEmail.style.border = '1px solid #002fff';
-		emailLabel.style.color = '#002fff';
+		dom.formGroupEmail.style.border = '1px solid #002fff';
+		dom.emailLabel.style.color = '#002fff';
 	} else {
 		EnteredEmail = 'EnteredButInvalid';
-		formGroupEmail.style.border = '1px solid tomato';
-		emailLabel.style.color = 'tomato';
+		dom.formGroupEmail.style.border = '1px solid tomato';
+		dom.emailLabel.style.color = 'tomato';
 	}
 });
 
 // send reset link:
 const sendResetLink = async (email) => {
-	formSubmitBtnText.textContent = '';
-	formSubmitBtnText.classList.add('spinner');
+	dom.btnForgetPasswordText.textContent = '';
+	dom.btnForgetPasswordText.classList.add('spinner');
 	try {
 		const res = await axios({
 			method: 'POST' ,
@@ -70,30 +65,30 @@ const sendResetLink = async (email) => {
 			}
 		});
 		if (res.data.status === 'success') {
-			formSubmitBtnText.classList.remove('spinner');
-			formSubmitBtnText.innerHTML = '&#10003;';
+			dom.btnForgetPasswordText.classList.remove('spinner');
+			dom.btnForgetPasswordText.innerHTML = '&#10003;';
 			showAlert('success' , 'Reset link sent successfully.')
 			setTimeout(() => {
 				location.assign('/login');
 			} , 500 );
 		}
 	} catch (e) {
-		formSubmitBtnText.classList.remove('spinner');
-		formSubmitBtnText.innerHTML = '&#10007;';
+		dom.btnForgetPasswordText.classList.remove('spinner');
+		dom.btnForgetPasswordText.innerHTML = '&#10007;';
 		setTimeout(() => {
-			formSubmitBtnText.textContent = 'Send Reset Link';
+			dom.btnForgetPasswordText.textContent = 'Send Reset Link';
 		} , 1000 );
 		showAlert('error' , e.response.data.message);
 	}
 };
-form.addEventListener('submit' , (e) => {
+dom.formForgetPassword.addEventListener('submit' , (e) => {
 	e.preventDefault();
 	if (EnteredEmail === 'notEntered') {
 		showAlert('error' , 'Please enter your email address.');
 	} else if (EnteredEmail === 'EnteredButInvalid') {
 		showAlert('error' , 'Please enter a valid email address.');
 	} else {
-		const email = emailInput.value;
+		const email = dom.emailInput.value;
 		sendResetLink(email);
 	}
 });

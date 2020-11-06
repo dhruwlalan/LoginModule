@@ -2,8 +2,10 @@
 extends base
 
 block append script
-	script(type='text/javascript' src='/vendor.bundle.js')
-	script(type='text/javascript' src='edit.bundle.js')
+	//- script(type='text/javascript' src='/vendor.bundle.js')
+	script(type='text/javascript' src='/vendor.30e039025e09436b44fc.bundle.js')
+	//- script(type='text/javascript' src='edit.bundle.js')
+	script(type='text/javascript' src='edit.b2d5ae4db75bc3a9c75e.bundle.js')
 
 block content
 	div.container
@@ -59,10 +61,10 @@ block content
 					div.form__group.form__group--curpass
 						input.form__group-input(id='CurPassInput' type='password')
 						label.form__group-label(id='CurPassLabel' for='passInput') Current Password
-						img.eye-svg.eyesvgforcurpass(src='assets/svg/passShow.svg')
+						img.eye-svg.eyesvgforcurpass(id='eyeSvgForCurPass' src='assets/svg/passShow.svg')
 					div.form__group.form__group--newpass
 						input.form__group-input(id='NewPassInput' type='password')
 						label.form__group-label(id='NewPassLabel' for='passInput') New Password
-						img.eye-svg.eyesvgfornewpass(src='assets/svg/passShow.svg')
+						img.eye-svg.eyesvgfornewpass(id='eyeSvgForNewPass' src='assets/svg/passShow.svg')
 					button.btn.btn__change-password(type='submit')
 						span.btn__change-password--text Change Password

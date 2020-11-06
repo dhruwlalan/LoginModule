@@ -2,8 +2,10 @@
 extends base
 
 block append script
-	script(type='text/javascript' src='/vendor.bundle.js')
-	script(type='text/javascript' src='login.bundle.js')
+	//- script(type='text/javascript' src='/vendor.bundle.js')
+	script(type='text/javascript' src='/vendor.30e039025e09436b44fc.bundle.js')
+	//- script(type='text/javascript' src='login.bundle.js')
+	script(type='text/javascript' src='login.130c23e529508a112184.bundle.js')
 
 block content
 	form.form.form--login(autocomplete='off')
@@ -19,7 +21,7 @@ block content
 			div.form__group.form__group--pass
 				input.form__group-input(id='passInput' type='password')
 				label.form__group-label(id='passLabel' for='passInput') Password
-				img.eye-svg(src='assets/svg/passShow.svg')
+				img.eye-svg(id='eyeSvgForPass' src='assets/svg/passShow.svg')
 			button.btn.btn__login(id='submit' type='submit')
 				span.btn__login--text Login
 			a.form__forget-password(href='/forgetPassword') Forget your password?

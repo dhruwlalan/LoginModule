@@ -1,12 +1,13 @@
 // ASSETS
 import './assets.js';
 
-// MAIN
+// EXTERNALS
 import axios from 'axios';
 import validator from 'validator';
 import showAlert from './views/alerts.js';
 import dom from './views/dom.js';
 
+// CODE
 let EnteredEmail = 'notEntered';
 let EnteredPass = 'notEntered';
 
@@ -39,12 +40,12 @@ dom.formGroupPass.addEventListener('mouseenter' , () => {
 		dom.formGroupPass.classList.add('hover-input');
 		dom.passLabel.classList.add('hover-label');
 	}
-	dom.eyeSvg.classList.add('showeyesvg');
+	dom.eyeSvgForPass.classList.add('showeyesvg');
 });
 dom.formGroupPass.addEventListener('mouseleave' , () => {
 	dom.formGroupPass.classList.remove('hover-input');
 	dom.passLabel.classList.remove('hover-label');
-	dom.eyeSvg.classList.remove('showeyesvg');
+	dom.eyeSvgForPass.classList.remove('showeyesvg');
 });
 
 // checking input :
@@ -93,15 +94,15 @@ dom.passInput.addEventListener('input' , () => {
 });
 
 // show hide password:
-dom.eyeSvg.addEventListener('click' , () => {
+dom.eyeSvgForPass.addEventListener('click' , () => {
 	if (dom.passInput.getAttribute('type') === 'password') {
 		dom.passInput.setAttribute('type' , 'text');
-		dom.eyeSvg.setAttribute('src' , '/assets/svg/passHide.svg');
-		dom.eyeSvg.style.display = 'inline-block';
+		dom.eyeSvgForPass.setAttribute('src' , '/assets/svg/passHide.svg');
+		dom.eyeSvgForPass.style.display = 'inline-block';
 	} else {
 		dom.passInput.setAttribute('type' , 'password');
-		dom.eyeSvg.setAttribute('src' , '/assets/svg/passShow.svg');
-		dom.eyeSvg.removeAttribute('style');
+		dom.eyeSvgForPass.setAttribute('src' , '/assets/svg/passShow.svg');
+		dom.eyeSvgForPass.removeAttribute('style');
 	}
 });
 
