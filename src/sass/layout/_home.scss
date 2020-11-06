@@ -41,10 +41,12 @@
 			@include flex( $jc: flex-end , $ai: center , );
 
 			@media (max-width: 550px) {
-				@include size( $w: 14rem , );
+				font-weight: 400;
+				font-size: 1.6rem;
+				@include size( $w: 12rem , );
 			}
 			@media (max-width: 450px) {
-				@include size( $w: 12rem , );
+				@include size( $w: 10rem , );
 			}
 		}
 
@@ -52,9 +54,15 @@
 			@include size( $h: 100% , );
 			@include typo( $c: $pri-blue , $fw: 500 , );
 			@include pbm( $b: 1px solid $pri-blue , );
-			@include pbm( $rad: 0 2rem 2rem 0 , $pl: 1rem , );
+			@include pbm( $rad: 0 2rem 2rem 0 , $p: 0 1rem , );
 			@include flex( $jc: flex-start , $ai: center , );
 			@include flex-item( $grow: 1 , );
+			overflow-x: scroll;
+
+			@media (max-width: 550px) {
+				font-size: 1.6rem;
+				font-weight: 400;
+			}
 		}
 	}
 }

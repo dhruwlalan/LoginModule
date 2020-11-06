@@ -5,7 +5,7 @@
 	padding: 2rem;
 }
 .form__forget-password {
-	@include typo( $c: $sec-blue , $ff: $roboto , $fs: 1rem , $fw: 400 , $td: none , );
+	@include typo( $c: $sec-blue , $ff: $roboto , $fs: 1.6rem , $fw: 300 , $td: none , );
 	outline: none;
 	&:hover, &:focus { border-bottom: 2px solid $sec-foc-blue; }
 }
@@ -36,6 +36,10 @@
 		@include pos-absolute( $l: 1.5rem , $t: 0px , $z: 10 , );
 		transform: translateY( -9px );
 		@include disable-selection;
+
+		@media (max-width: 550px) {
+			transform: translateY( -7px );
+		}
 	}
 
 	&__profile {

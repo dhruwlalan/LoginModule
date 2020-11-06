@@ -7,6 +7,6 @@
 
 .spinner {
 	@include size( $h: 2rem , $w: 2rem , );
-	@include pbm( $rad: 50% , $b: 2px solid $white , $bb: 2px solid $pri-blue ,);
+	@include pbm( $rad: 50% , $b: 2px solid $white , $bb: 2px solid transparent ,);
 	animation: spin 1s linear infinite;
 }
