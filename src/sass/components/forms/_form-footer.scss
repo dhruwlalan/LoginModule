@@ -3,6 +3,7 @@
 .form__footer {
 	@include typo( $c: $white , $ff: $roboto , $fs: 1.5rem , $fw: 300 , $ta: center , );
 	@include pbm( $mb: 1.5rem , );
+	@include disable-selection;
 	z-index: 10;
 
 	&--link {

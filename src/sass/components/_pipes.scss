@@ -10,7 +10,7 @@
 
 	&__pipe {
 		@include size( $h: 3rem , $w: 1rem , );
-		@include bg( $c: LightCyan , );
+		@include bg( $c: $background , );
 		@include pos-absolute( $t: 0 , );
 		@include pbm( $rad: 50px , );
 		transform: translateY( -5px );

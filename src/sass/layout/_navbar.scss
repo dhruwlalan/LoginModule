@@ -6,6 +6,7 @@
 	@include pbm( $rad: 1rem , $p: 0 2rem , );
 	@include flex( $jc: space-between , $ai: center , );
 	box-shadow: 0 0 4rem rgb(0 0 0 / 25%);
+	@include disable-selection;
 
 	&__link {
 		@include flex( $ai: center , );

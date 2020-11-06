@@ -6,6 +6,7 @@
 }
 .form__forget-password {
 	@include typo( $c: $sec-blue , $ff: $roboto , $fs: 1.6rem , $fw: 300 , $td: none , );
+	@include disable-selection;
 	outline: none;
 	&:hover, &:focus { border-bottom: 2px solid $sec-foc-blue; }
 }
@@ -46,6 +47,7 @@
 		@include size( $h: 12.5rem , $w: 100% , );
 		@include pbm( $mb: 2.5rem , );
 		@include flex( $jc: center , $ai: center , );
+		@include disable-selection;
 
 		&--input { display: none; }
 		&--preview {

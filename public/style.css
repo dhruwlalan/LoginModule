@@ -28,7 +28,7 @@ body {
 }
 @media (max-width: 450px) {
   body {
-    height: auto;
+    min-height: auto;
     padding: 1rem;
   }
 }
@@ -61,6 +61,18 @@ body {
   margin: 0 auto;
   font: 500 1.6rem var(--roboto);
   text-align: center;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
   box-shadow: 0 0 4rem 1rem rgba(0, 0, 0, 0.25);
 }
 @media (max-width: 450px) {
@@ -139,7 +151,7 @@ body {
 .pipes__pipe {
   height: 3rem;
   width: 1rem;
-  background: LightCyan;
+  background: var(--background);
   position: absolute;
   top: 0;
   border-radius: 50px;
@@ -217,6 +229,18 @@ input:-webkit-autofill:focus::first-line {
   position: absolute;
   top: 2.6rem;
   left: 2.2rem;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
   fill: var(--pri-blue);
 }
 .form__header--title {
@@ -227,6 +251,18 @@ input:-webkit-autofill:focus::first-line {
   text-align: center;
   padding: 0 7rem;
   margin-top: 2rem;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 .form__header--subtitle {
   color: var(--sec-blue);
@@ -235,6 +271,18 @@ input:-webkit-autofill:focus::first-line {
   padding: 0 1rem;
   margin: 1.5rem 0;
   margin-bottom: 1rem;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 .form__header--midtitle {
   color: var(--sec-blue);
@@ -242,6 +290,18 @@ input:-webkit-autofill:focus::first-line {
   text-align: center;
   padding: 0 1rem;
   margin: 1rem 0;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 .form__body {
@@ -253,6 +313,18 @@ input:-webkit-autofill:focus::first-line {
   color: var(--sec-blue);
   font: 300 1.6rem var(--roboto);
   text-decoration: none;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
   outline: none;
 }
 .form__forget-password:hover, .form__forget-password:focus {
@@ -320,6 +392,18 @@ input:-webkit-autofill:focus::first-line {
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 .form__group__profile--input {
   display: none;
@@ -387,6 +471,18 @@ input:-webkit-autofill:focus::first-line {
   font: 300 1.5rem var(--roboto);
   text-align: center;
   margin-bottom: 1.5rem;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
   z-index: 10;
 }
 .form__footer--link {
@@ -428,6 +524,18 @@ input:-webkit-autofill:focus::first-line {
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
   outline: none;
   cursor: pointer;
 }
@@ -485,7 +593,7 @@ input:-webkit-autofill:focus::first-line {
 }
 
 .section {
-  background: LightCyan;
+  background: var(--background);
   padding: 4rem;
   border-radius: 1rem;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25);
@@ -517,6 +625,18 @@ input:-webkit-autofill:focus::first-line {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 0 4rem rgba(0, 0, 0, 0.25);
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 .navbar__link {
   display: flex;
@@ -562,11 +682,35 @@ input:-webkit-autofill:focus::first-line {
   font: 400 4rem var(--roboto);
   text-align: center;
   margin-bottom: 1rem;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 .home__profile {
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 .home__profile--img {
   height: 5rem;
@@ -593,6 +737,18 @@ input:-webkit-autofill:focus::first-line {
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 .home__details__row {
   height: 3.5rem;
@@ -614,6 +770,18 @@ input:-webkit-autofill:focus::first-line {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 @media (max-width: 550px) {
   .home__details--key {
@@ -638,12 +806,16 @@ input:-webkit-autofill:focus::first-line {
   justify-content: flex-start;
   align-items: center;
   flex-grow: 1;
-  overflow-x: scroll;
 }
 @media (max-width: 550px) {
   .home__details--value {
     font-size: 1.6rem;
     font-weight: 400;
+  }
+}
+@media (max-width: 450px) {
+  .home__details--value {
+    overflow-x: scroll;
   }
 }
 
@@ -653,6 +825,18 @@ input:-webkit-autofill:focus::first-line {
   padding: 4rem;
   border-radius: 1rem;
   margin: 0 auto;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25);
 }
 @media (max-width: 450px) {

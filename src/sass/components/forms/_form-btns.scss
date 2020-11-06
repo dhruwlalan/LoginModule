@@ -6,6 +6,7 @@
 	@include typo( $c: $white , $ff: $roboto , $fs: 2rem , $fw: 300 , );
 	@include pbm( $rad: 10px , $b: none , );
 	@include flex( $jc: center , $ai: center , );
+	@include disable-selection;
 	outline: none;
 	cursor: pointer;
 

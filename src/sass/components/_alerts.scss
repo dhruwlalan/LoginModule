@@ -5,6 +5,7 @@
 	@include pos-fixed( $t: 0 , $l: 0 , $r: 0 , $z: 100 , );
 	@include pbm( $m: 0 auto , $rad: 0 0 1rem 1rem , $p: 2rem 1rem , );
 	@include typo( $ff: $mfont , $fs: 1.6rem , $fw: 500 , $ta: center , );
+	@include disable-selection;
 	box-shadow: 0 0 4rem 1rem rgb(0 0 0 / 25%);
 
 	@media (max-width: 450px) {
