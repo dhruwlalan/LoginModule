@@ -45,6 +45,7 @@ exports.resizeUserPhoto = async (req , res , next) => {
 
     await s3.upload(params, (error, data) => {
         if (error) {
+            console.log(error);
             return next(new AppError('Image upload to aws is unsuccessfull!',400));
         }
         req.file.location = data.Location;
