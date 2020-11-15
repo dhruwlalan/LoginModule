@@ -30,7 +30,10 @@ block content
 			- const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1)
 			h1.home__title Welcome,
 			div.home__profile
-				img.home__profile--img(src=`/assets/images/${user.photo}`)
+				- if (user.photo === 'default.png')
+					img.home__profile--img(src=`/assets/images/${user.photo}`)
+				- else
+					img.home__profile--img(src=`${user.photo}`)
 				span.home__profile--name #{nameCapitalized}
 		div.pipes
 			div.pipes__pipe.pipes__pipe--left

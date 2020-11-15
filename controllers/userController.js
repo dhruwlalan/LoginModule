@@ -1,5 +1,6 @@
 const multer = require('multer');
 const sharp = require('sharp');
+const AWS = require('aws-sdk')
 const User = require('../models/UserModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -8,8 +9,13 @@ const APIFeatures = require('../utils/apiFeatures');
 const createSendToken = require('../utils/createSendToken');
 
 
+// Configure AWS S3:
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ID ,
+    secretAccessKey: process.env.AWS_SECRET ,
+})
+
 // Configure Muulter & Sharp:
-const multerStorage = multer.memoryStorage()
 const multerFilter = (req , file , cb) => {
     if (file.mimetype.startsWith('image')) {
         cb(null , true);
@@ -18,20 +24,32 @@ const multerFilter = (req , file , cb) => {
     }
 }
 const upload = multer({
-    storage: multerStorage ,
+    storage: multer.memoryStorage() ,
     fileFilter: multerFilter ,
 });
 exports.uploadUserPhoto = upload.single('photo');
-exports.resizeUserPhoto = (req , res , next) => {
+exports.resizeUserPhoto = async (req , res , next) => {
     if (!req.file) return next();
     req.file.filename = `u-${req.user.id }.jpeg`;
     
-    sharp(req.file.buffer)
+    const data = await sharp(req.file.buffer)
         .resize(300 , 300)
         .toFormat('jpeg')
-        .toFile(`public/assets/images/${req.file.filename }`);
+        .toBuffer();
 
-    next();
+    const params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: req.file.filename ,
+        Body: data ,
+    }
+
+    await s3.upload(params, (error, data) => {
+        if (error) {
+            return next(new AppError('Image upload to aws is unsuccessfull!',400));
+        }
+        req.file.location = data.Location;
+        next();
+    });
 }
 
 
@@ -82,10 +100,10 @@ exports.updateMe = catchAsync(async (req , res , next) => {
     Object.keys(req.body).forEach(el => {
         if (['name', 'email' , 'photo'].includes(el)) filteredBody[el] = req.body[el];
     });
-    if (req.file) filteredBody.photo = req.file.filename;
+    if (req.file) filteredBody.photo = req.file.location;
 
     // 3) Update user document
-    const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
+    const updatedUser = await User.findByIdAndUpdate(req.user.id , filteredBody , {
         new: true,
         runValidators: true
     });

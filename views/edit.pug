@@ -44,7 +44,10 @@ block content
 				h3.form__header--midtitle Update Your Profile Photo.
 				div.form__body
 					div.form__group__profile
-						img.form__group__profile--preview(id="uploadImagePreview" src=`/assets/images/${user.photo}`)
+						- if (user.photo === 'default.png')
+							img.form__group__profile--preview(id="uploadImagePreview" src=`/assets/images/${user.photo}`)
+						- else
+							img.form__group__profile--preview(id="uploadImagePreview" src=`${user.photo}`)
 						input.form__group__profile--input(id="uploadImageInput" type="file" accept="image/*" name='photo')
 						div.form__group__profile--links
 							label.form__group__profile--remove(id='removeImageLabel') Remove Photo
