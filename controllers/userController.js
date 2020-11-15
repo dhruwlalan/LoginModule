@@ -30,7 +30,7 @@ const upload = multer({
 exports.uploadUserPhoto = upload.single('photo');
 exports.resizeUserPhoto = async (req , res , next) => {
     if (!req.file) return next();
-    req.file.filename = `u-${req.user.id }.jpeg`;
+    req.file.filename = `u-${req.user.id }-${Date.now() }.jpeg`;
     
     const data = await sharp(req.file.buffer)
         .resize(300 , 300)
@@ -41,6 +41,20 @@ exports.resizeUserPhoto = async (req , res , next) => {
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: req.file.filename ,
         Body: data ,
+    }
+
+    if (req.user.prePhoto) {
+        const oldPhotoIndex = req.user.prePhoto.indexOf('u-');
+        const oldPhotoKey = req.user.prePhoto.slice(oldPhotoIndex , req.user.prePhoto.length);
+        
+        await s3.deleteObject({
+            Bucket: process.env.AWS_BUCKET_NAME ,
+            Key: oldPhotoKey ,
+        } , (error , data) => {
+            if (error) {
+                return next(new AppError('Unable to delete previous photo',400));
+            }
+        });
     }
 
     await s3.upload(params, (error, data) => {
@@ -101,7 +115,10 @@ exports.updateMe = catchAsync(async (req , res , next) => {
     Object.keys(req.body).forEach(el => {
         if (['name', 'email' , 'photo'].includes(el)) filteredBody[el] = req.body[el];
     });
-    if (req.file) filteredBody.photo = req.file.location;
+    if (req.file) { 
+        filteredBody.photo = req.file.location;
+        filteredBody.prePhoto = req.file.location;
+    }
 
     // 3) Update user document
     const updatedUser = await User.findByIdAndUpdate(req.user.id , filteredBody , {
