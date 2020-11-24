@@ -9,34 +9,29 @@ const APIFeatures = require('../utils/apiFeatures');
 const createSendToken = require('../utils/createSendToken');
 
 
-// Configure AWS S3:
+/*Configure AWS S3*/
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ID ,
     secretAccessKey: process.env.AWS_SECRET ,
-})
+});
 
-// Configure Muulter & Sharp:
-const multerFilter = (req , file , cb) => {
-    if (file.mimetype.startsWith('image')) {
-        cb(null , true);
-    } else {
-        cb(new AppError('Not an image! Please upload only images.' , 400) , false);
-    }
-}
+/*Configure Multer & Sharp*/
 const upload = multer({
     storage: multer.memoryStorage() ,
-    fileFilter: multerFilter ,
+    fileFilter: (req , file , cb) => {
+        if (file.mimetype.startsWith('image')) {
+            cb(null , true);
+        } else {
+            cb(new AppError('Not an image! Please upload only images.' , 400) , false);
+        }
+    } ,
 });
 exports.uploadUserPhoto = upload.single('photo');
 exports.resizeUserPhoto = async (req , res , next) => {
     if (!req.file) return next();
     req.file.filename = `u-${req.user.id }-${Date.now() }.jpeg`;
     
-    const data = await sharp(req.file.buffer)
-        .resize(300 , 300)
-        .toFormat('jpeg')
-        .toBuffer();
-
+    const data = await sharp(req.file.buffer).resize(300 , 300).toFormat('jpeg').toBuffer();
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: req.file.filename ,
@@ -68,7 +63,7 @@ exports.resizeUserPhoto = async (req , res , next) => {
 }
 
 
-// CRUD for admin:
+/*CRUD for Admin*/
 exports.getAllUsers = catchAsync(async (req , res) => {
     const features = new APIFeatures(
         User.find() , req.query
@@ -103,24 +98,26 @@ exports.deleteUser = catchAsync(async (req , res) => {
 });
 
 
-// UD for normal users:
+/*Update & Delete for Normal Users*/
 exports.updateMe = catchAsync(async (req , res , next) => {
-    // 1) Create error if user POSTs password data
+    // 1 Create error if user POSTs password data:
     if (req.body.password || req.body.passwordConfirm) {
         return next(new AppError('This route is not for password updates. Please use /updateMyPassword.',400));
     }
 
-    // 2) Filtered out unwanted fields names that are not allowed to be updated
+    // 2 Filtered out unwanted fields names that are not allowed to be updated:
     const filteredBody = {};
     Object.keys(req.body).forEach(el => {
         if (['name', 'email' , 'photo'].includes(el)) filteredBody[el] = req.body[el];
     });
+
+    // 3 Append photo if user uploaded new profile photo:
     if (req.file) { 
         filteredBody.photo = req.file.location;
         filteredBody.prePhoto = req.file.location;
     }
 
-    // 3) Update user document
+    // 3) Update user document:
     const updatedUser = await User.findByIdAndUpdate(req.user.id , filteredBody , {
         new: true,
         runValidators: true
@@ -129,20 +126,20 @@ exports.updateMe = catchAsync(async (req , res , next) => {
     sendResponse(res , 200 , { user: updatedUser });
 });
 exports.updatePassword = catchAsync(async (req , res , next) => {
-    // 1. get user from the collection:
+    // 1 get user from the collection:
     const user = await User.findById(req.user.id).select('+password');
 
-    // 2. check if the posted current password is correct:
+    // 2 check if the posted current password is correct:
     if (!(await user.correctPassword(req.body.passwordCurrent , user.password))) {
         return next(new AppError('Your current password is wrong.' , 401))
     }
 
-    // 3. if current password was correct, update new password:
+    // 3 if current password was correct, update new password:
     user.password = req.body.password;
     user.passwordConfirm = req.body.passwordConfirm;
     await user.save();
 
-    // 4. log user in, send jwt:
+    // 4 log user in, send jwt:
     createSendToken(user , 200 , req , res);
 });
 exports.deleteMe = catchAsync(async (req , res , next) => {
