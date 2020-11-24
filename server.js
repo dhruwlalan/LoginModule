@@ -1,9 +1,9 @@
 require('dotenv').config();
-const mongoose = require('mongoose');
+const mongodb = require('./database.js');
 const app = require('./app.js');
 
 
-/* global handler for unhandeled errors */
+/*Global Error Handlers for Unhandeled Errors*/
 process.on('unhandledRejection' , (err) => {
 	console.log(err);
 	console.log('Unhandled Rejection! Shutting Down...');
@@ -25,23 +25,10 @@ process.on('SIGTERM' , () => {
 	})
 });
 
-/* connect mongodb */
-// 1. build the database string:
-const DB = process.env.MDB_ATLAS.replace('<PASS>' , process.env.MDB_PASS);
-// 2. connect to the database:
-mongoose.connect(DB , {
-	useNewUrlParser: true ,
-	useCreateIndex: true ,
-	useFindAndModify: false ,
-	useUnifiedTopology: true ,
-})
-.then(() => { console.log('DB Connection Successful!') })
-.catch((err) => { 
-	console.log('DB Connection Unsuccessful!');
-	console.log('error:' , err.message);
-});
+
+/*Connect to MongoDB*/
+mongodb.connect();
 
 
-/* start server */
-port = process.env.PORT || 8000;
-const server = app.listen(port);
+/*Start Server*/
+const server = app.listen(process.env.PORT || 8000);
