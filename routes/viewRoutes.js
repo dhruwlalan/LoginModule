@@ -1,19 +1,25 @@
 const router = require('express').Router({ strict: true });
+const AppError = require('../utils/appError.js');
 const authController = require('../controllers/authController');
 const viewController = require('../controllers/viewController');
 
+/*Check if the user is already logged in*/
 router.use(authController.isLoggedIn);
 
-router.use( '/signup' , viewController.signup);
-router.use( '/login' , viewController.login);
-router.use( '/edit' , authController.protect , viewController.edit);
-router.use( '/forgetPassword' , viewController.forgetPassword);
-router.use( '/resetPassword/:token' , viewController.resetPassword);
-router.use( '/' , viewController.root);
+/*Define Routes*/
+router.get( '/signup' , viewController.signup);
+router.get( '/login' , viewController.login);
+router.get( '/edit' , authController.protect , viewController.edit);
+router.get( '/forgetPassword' , viewController.forgetPassword);
+router.get( '/resetPassword/:token' , viewController.resetPassword);
+router.get( '/' , viewController.root);
 
 /*Handle Undefined Routes*/
-app.all( '*' , (req , res , next) => {
-	next(new AppError(`Can't find the route ${req.originalUrl } on this server!` , 404));
+router.all( '*' , (req , res , next) => {
+	res.status(404).render('pageNotFound' , {
+		unknownRoute: req.originalUrl ,
+	});
 });
 
+/*Export Router*/
 module.exports = router;
