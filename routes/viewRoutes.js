@@ -11,4 +11,9 @@ router.use( '/forgetPassword' , viewController.forgetPassword);
 router.use( '/resetPassword/:token' , viewController.resetPassword);
 router.use( '/' , viewController.root);
 
+/*Handle Undefined Routes*/
+app.all( '*' , (req , res , next) => {
+	next(new AppError(`Can't find the route ${req.originalUrl } on this server!` , 404));
+});
+
 module.exports = router;
