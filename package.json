@@ -1,8 +1,8 @@
 {
-    "name": "",
+    "name": "login-module",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "description": "Simple SignUp & Login module made using NodeJS, ExpressJS, MongoDB & Vanilla JavaScript.",
+    "main": "server.js",
     "author": "dhruw",
     "license": "MIT",
     "scripts": {
