@@ -1,47 +1,28 @@
 require('dotenv').config();
-const mongoose = require('mongoose');
+const mongodb = require('./database.js');
 const app = require('./app.js');
 
 
-/* global handler for unhandeled errors */
+/*Global Error Handlers for Unhandeled Errors*/
 process.on('unhandledRejection' , (err) => {
-	console.log(err);
-	console.log('Unhandled Rejection! Shutting Down...');
-	server.close(() => {
-		process.exit(1);
-	});
+	console.log('Unhandled Rejection Error: ' , err);
+	console.log('Shutting Down...');
+	server.close(() => { process.exit(1) });
 });
 process.on('uncaughtException' , (err) => {
-	console.log(err);
-	console.log('Uncaught Exception! Shutting Down...');
-	server.close(() => {
-		process.exit(1);
-	});
+	console.log('Uncaught Exception Error: ' , err);
+	console.log('Shutting Down...');
+	server.close(() => { process.exit(1) });
 });
 process.on('SIGTERM' , () => {
 	console.log('SIGTERM RECEIVED. Shutting down gracefully..!');
-	server.close(() => {
-		console.log('Process Terminated!');
-	})
-});
-
-/* connect mongodb */
-// 1. build the database string:
-const DB = process.env.MDB_ATLAS.replace('<PASS>' , process.env.MDB_PASS);
-// 2. connect to the database:
-mongoose.connect(DB , {
-	useNewUrlParser: true ,
-	useCreateIndex: true ,
-	useFindAndModify: false ,
-	useUnifiedTopology: true ,
-})
-.then(() => { console.log('DB Connection Successful!') })
-.catch((err) => { 
-	console.log('DB Connection Unsuccessful!');
-	console.log('error:' , err.message);
+	server.close(() => { console.log('Process Terminated!') });
 });
 
 
-/* start server */
-port = process.env.PORT || 8000;
-const server = app.listen(port);
+/*Connect to MongoDB*/
+mongodb.connect();
+
+
+/*Start Server*/
+const server = app.listen(process.env.PORT || 8000);

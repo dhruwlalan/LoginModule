@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken');
 
-// create token
+/*Create Token*/
 const signToken = (id) => {
 	return jwt.sign({ id } , process.env.JWT_SECRET , {
 		expiresIn: process.env.JWT_EXPIRES_IN
 	});
 }
 
-// send token
+/*Send Token*/
 module.exports = (user , statusCode , req , res) => {
 	// get created token:
 	const token = signToken(user._id);
@@ -19,10 +19,14 @@ module.exports = (user , statusCode , req , res) => {
 		secure: req.secure || req.headers['x-forwarded-proto'] === 'https' ,
 	});
 
-	// Remove unwanted fields from output:
-	user.password = undefined;
-	user.__v = undefined;
-	user.active = undefined;
+	// Remove unwanted fields from output in production:
+	if (process.env.NODE_ENV === 'production') {
+		user.active = undefined;
+		user.password = undefined;
+		user.passwordChangedAt = undefined;
+		user.prePhoto = undefined;
+		user.__v = undefined;
+	}
 
 	// send token:
 	res.status(statusCode).json({

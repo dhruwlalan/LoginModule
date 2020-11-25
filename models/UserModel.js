@@ -1,9 +1,9 @@
-const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
-// define user schema:
+/*Define User Schema*/
 const userSchema = new mongoose.Schema({
 	name: {
 		type: String ,
@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema({
 	passwordResetExpires: Date ,
 });
 
-// mongoose middleware hooks:
+/*Mongoose Query Middleware Hooks*/
 userSchema.pre('save' , async function (next) {
 	if (!this.isModified('password')) return next();
 	if (this.isNew) {
@@ -69,10 +69,9 @@ userSchema.pre(/^find/ , function (next) {
 	next();
 });
 
-// instance methods for current document access:
-// compare posted password (candidatePassword) & password stored in database (userPassword)
-userSchema.methods.correctPassword = async function (candidatePassword , userPassword) {
-	return await bcrypt.compare(candidatePassword , userPassword);
+/*Instance Methods for Current Document Access*/
+userSchema.methods.correctPassword = async function (postedPassword , storedPassword) {
+	return await bcrypt.compare(postedPassword , storedPassword);
 };
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 	if (this.passwordChangedAt) {
@@ -84,12 +83,12 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 userSchema.methods.createPasswordResetToken = function () {
 	const resetToken = crypto.randomBytes(32).toString('hex');
 	this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-	this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
-
+	this.passwordResetExpires = Date.now() + 600000;
 	return resetToken;
 }
 
-// create user model:
+/*Create User Model based on the userSchema*/
 const User = mongoose.model('User' , userSchema);
 
+/*Export the User Model*/
 module.exports = User;

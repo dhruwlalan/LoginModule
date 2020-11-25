@@ -1,19 +1,19 @@
 {
-    "name": "",
+    "name": "login-module",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "description": "Simple SignUp & Login module made using NodeJS, ExpressJS, MongoDB & Vanilla JavaScript.",
+    "main": "server.js",
     "author": "dhruw",
     "license": "MIT",
     "scripts": {
         "start": "node server.js",
-        "start:dev": "webpack --config configs/webpack.dev.js --watch",
-        "start:prod": "webpack --config configs/webpack.prod.js --watch",
+        "debug": "ndb server.js",
         "start:server": "cross-env nodemon server.js",
-        "build:dev": "webpack --config configs/webpack.dev.js",
-        "build:prod": "webpack --config configs/webpack.prod.js",
-        "build:server": "cross-env NODE_ENV=production nodemon server.js",
-        "debug": "ndb server.js"
+        "start:server:prod": "cross-env NODE_ENV=production nodemon server.js",
+        "start:webpack": "webpack --config configs/webpack.dev.js --watch",
+        "start:webpack:prod": "webpack --config configs/webpack.prod.js --watch",
+        "build:webpack": "webpack --config configs/webpack.dev.js",
+        "build:webpack:prod": "webpack --config configs/webpack.prod.js"
     },
     "dependencies": {
         "aws-sdk": "^2.789.0",
