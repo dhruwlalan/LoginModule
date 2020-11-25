@@ -30,5 +30,12 @@ router.route('/:id')
    .patch(userController.updateUser)
    .delete(userController.deleteUser);
 
+/*Handle Undefined Routes*/
+router.all( '*' , (req , res , next) => {
+	res.status(404).render('pageNotFound' , {
+		unknownRoute: req.originalUrl ,
+	});
+});
+
 /*Export Router*/
 module.exports = router;

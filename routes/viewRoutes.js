@@ -14,7 +14,7 @@ router.get( '/resetPassword/:token' , viewController.resetPassword);
 router.get( '/' , viewController.root);
 
 /*Logged In Routes*/
-router.get( '/edit' , authController.protect , viewController.edit);
+router.get( '/edit' , viewController.edit);
 
 /*Handle Undefined Routes*/
 router.all( '*' , (req , res , next) => {
