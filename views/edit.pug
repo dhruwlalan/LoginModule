@@ -2,10 +2,14 @@
 extends base
 
 block append script
-	//- script(type='text/javascript' src='/vendor.bundle.js')
-	script(type='text/javascript' src='/vendor.30e039025e09436b44fc.bundle.js')
-	//- script(type='text/javascript' src='edit.bundle.js')
-	script(type='text/javascript' src='edit.b2d5ae4db75bc3a9c75e.bundle.js')
+	- if ( process.env.FENV === 'development')
+		script(type='text/javascript' src='/vendor.bundle.js')
+	- else
+		script(type='text/javascript' src='/vendor.30e039025e09436b44fc.bundle.js')
+	- if ( process.env.FENV === 'development')
+		script(type='text/javascript' src='edit.bundle.js')
+	- else
+		script(type='text/javascript' src='edit.b2d5ae4db75bc3a9c75e.bundle.js')
 
 block content
 	div.container
