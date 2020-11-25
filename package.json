@@ -7,12 +7,13 @@
     "license": "MIT",
     "scripts": {
         "start": "node server.js",
+        "debug": "ndb server.js",
         "start:server": "cross-env nodemon server.js",
         "start:server:prod": "cross-env NODE_ENV=production nodemon server.js",
         "start:webpack": "webpack --config configs/webpack.dev.js --watch",
+        "start:webpack:prod": "webpack --config configs/webpack.prod.js --watch",
         "build:webpack": "webpack --config configs/webpack.dev.js",
-        "build:webpack:prod": "webpack --config configs/webpack.prod.js",
-        "debug": "ndb server.js"
+        "build:webpack:prod": "webpack --config configs/webpack.prod.js"
     },
     "dependencies": {
         "aws-sdk": "^2.789.0",
