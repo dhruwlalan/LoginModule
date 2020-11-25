@@ -19,10 +19,14 @@ module.exports = (user , statusCode , req , res) => {
 		secure: req.secure || req.headers['x-forwarded-proto'] === 'https' ,
 	});
 
-	// Remove unwanted fields from output:
-	user.password = undefined;
-	user.__v = undefined;
-	user.active = undefined;
+	// Remove unwanted fields from output in production:
+	if (process.env.NODE_ENV === 'production') {
+		user.active = undefined;
+		user.password = undefined;
+		user.passwordChangedAt = undefined;
+		user.prePhoto = undefined;
+		user.__v = undefined;
+	}
 
 	// send token:
 	res.status(statusCode).json({

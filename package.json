@@ -7,12 +7,11 @@
     "license": "MIT",
     "scripts": {
         "start": "node server.js",
-        "start:dev": "webpack --config configs/webpack.dev.js --watch",
-        "start:prod": "webpack --config configs/webpack.prod.js --watch",
         "start:server": "cross-env nodemon server.js",
-        "build:dev": "webpack --config configs/webpack.dev.js",
-        "build:prod": "webpack --config configs/webpack.prod.js",
-        "build:server": "cross-env NODE_ENV=production nodemon server.js",
+        "start:server:prod": "cross-env NODE_ENV=production nodemon server.js",
+        "start:webpack": "webpack --config configs/webpack.dev.js --watch",
+        "build:webpack": "webpack --config configs/webpack.dev.js",
+        "build:webpack:prod": "webpack --config configs/webpack.prod.js",
         "debug": "ndb server.js"
     },
     "dependencies": {
