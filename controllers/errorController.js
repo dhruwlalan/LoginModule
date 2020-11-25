@@ -53,7 +53,7 @@ const handleCastError = (err) => {
 }
 const handleDuplicateFields = (err) => {
 	const keys = Object.keys(err.keyValue);
-	const message = `field '${keys }' with value '${err.keyValue[keys] }' has already been taken!`;
+	const message = `${keys } already exists!`;
 	err = new AppError(message , 400);
 	err.name = 'Duplicate Field Value Error';
 	return err;
