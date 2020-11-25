@@ -66,24 +66,25 @@ const handleJWTExpiredError = (err) => {
 }
 
 module.exports = (err , req , res , next) => {
+	console.log('AppError: ' , err);
 	err.statusCode = err.statusCode || 500;
 	err.status = err.status || 'error';
 
 	if (process.env.NODE_ENV === 'development') {
+		// send error:
 		sendErrorDev(err , res);
 	} else if (process.env.NODE_ENV === 'production') {
-			
-		// handle validation errors:
+		// handle validation error:
 		if (err.name === 'ValidationError') err = validationError(err);
-		// handle cast errors:
+		// handle cast error:
 		if (err.name === 'CastError') err = handleCastError(err);
-		// handle duplicate field entry errors:
+		// handle duplicate field entry error:
 		if (err.code === 11000) err = handleDuplicateFields(err);
-		// handle jwt errors:
+		// handle malformed jwt error:
 		if (err.name === 'JsonWebTokenError') err = handleJWTError(err);
+		// handle jwt token expired error:
 		if (err.name === 'TokenExpiredError') err = handleJWTExpiredError(err);
-
-		// send the error
+		// send error:
 		sendErrorProd(err , res);
 	}
 }
