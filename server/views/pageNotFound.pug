@@ -1,6 +1,11 @@
 
 extends base
 
+block append script
+	- if ( process.env.FENV === 'development')
+		script(type='text/javascript' src='/vendor.bundle.js')
+		script(type='text/javascript' src='/noScript.bundle.js')
+
 block content
 	div.container
 		div.pnf

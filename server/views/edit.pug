@@ -4,12 +4,11 @@ extends base
 block append script
 	- if ( process.env.FENV === 'development')
 		script(type='text/javascript' src='/vendor.bundle.js')
+		script(type='text/javascript' src='/edit.bundle.js')
 	- else
-		script(type='text/javascript' src='/vendor.30e039025e09436b44fc.bundle.js')
-	- if ( process.env.FENV === 'development')
-		script(type='text/javascript' src='edit.bundle.js')
-	- else
-		script(type='text/javascript' src='edit.b2d5ae4db75bc3a9c75e.bundle.js')
+		- if (bundle.vendor)
+			script(type='text/javascript' src=`/${bundle.vendor}`)
+		script(type='text/javascript' src=`/${bundle.edit}`)
 
 block content
 	div.container

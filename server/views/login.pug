@@ -4,12 +4,11 @@ extends base
 block append script
 	- if ( process.env.FENV === 'development')
 		script(type='text/javascript' src='/vendor.bundle.js')
+		script(type='text/javascript' src='/login.bundle.js')
 	- else
-		script(type='text/javascript' src='/vendor.30e039025e09436b44fc.bundle.js')
-	- if ( process.env.FENV === 'development')
-		script(type='text/javascript' src='login.bundle.js')
-	- else
-		script(type='text/javascript' src='login.130c23e529508a112184.bundle.js')
+		- if (bundle.vendor)
+			script(type='text/javascript' src=`/${bundle.vendor}`)
+		script(type='text/javascript' src=`/${bundle.login}`)
 
 block content
 	form.form.form--login(autocomplete='off')

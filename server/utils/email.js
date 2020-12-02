@@ -11,13 +11,24 @@ module.exports = class Email {
 	}
 
 	transporter() {
-		return nodemailer.createTransport({
-			service: 'gmail' ,
-			auth: {
-				user: 'dhruwlalan19@gmail.com' ,
-				pass: process.env.GMAIL_PASSWORD ,
-			}
-		});
+		if (process.env.NODE_ENV === 'production') {
+			return nodemailer.createTransport({
+				service: 'gmail' ,
+				auth: {
+					user: process.env.GMAIL_FROM ,
+					pass: process.env.GMAIL_PASSWORD ,
+				}
+			});
+		} else {
+			return nodemailer.createTransport({
+				host: process.env.MT_HOST ,
+				port: process.env.MT_PORT ,
+				auth: {
+					user: process.env.MT_USER ,
+					pass: process.env.MT_PASS ,
+				}
+			});
+		}
 	}
 	
 	async send () {

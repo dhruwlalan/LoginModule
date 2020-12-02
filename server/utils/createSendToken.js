@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const removeUnwantedFields = require('./removeUnwantedFields');
 
 /*Create Token*/
 const signToken = (id) => {
@@ -9,26 +10,20 @@ const signToken = (id) => {
 
 /*Send Token*/
 module.exports = (user , statusCode , req , res) => {
-	// get created token:
+	// 1 get created token:
 	const token = signToken(user._id);
 
-	// store in cookie:
+	// 2 store in cookie:
 	res.cookie('jwt' , token , {
 		expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000) ,
 		httpOnly: true ,
 		secure: req.secure || req.headers['x-forwarded-proto'] === 'https' ,
 	});
 
-	// Remove unwanted fields from output in production:
-	if (process.env.NODE_ENV === 'production') {
-		user.active = undefined;
-		user.password = undefined;
-		user.passwordChangedAt = undefined;
-		user.prePhoto = undefined;
-		user.__v = undefined;
-	}
+	// 3 Remove unwanted fields:
+	user = removeUnwantedFields(user);
 
-	// send token:
+	// 4 send token:
 	res.status(statusCode).json({
 		status: 'success' ,
 		token ,

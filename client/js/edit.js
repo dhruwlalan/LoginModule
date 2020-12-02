@@ -187,7 +187,7 @@ const updateUserData = async (name , email) => {
 	try {
 		const res = await axios({
 			method: 'PATCH' ,
-			url: '/api/v1/users/updateMe' ,
+			url: '/api/v1/users/updateMyData' ,
 			data: {
 				name ,
 				email ,
@@ -240,7 +240,7 @@ const uploadImage = async (form) => {
 	try {
 		const res = await axios({
 			method: 'PATCH' ,
-			url: '/api/v1/users/updateMe' ,
+			url: '/api/v1/users/updateMyData' ,
 			data: form ,
 		});
 		if (res.data.status === 'success') {

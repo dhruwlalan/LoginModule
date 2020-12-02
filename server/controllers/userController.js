@@ -2,13 +2,14 @@ const crypto = require('crypto');
 const multer = require('multer');
 const sharp = require('sharp');
 const AWS = require('aws-sdk')
-const User = require('../models/UserModel');
+const User = require('../database/UserModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Email = require('../utils/email');
 const sendResponse = require('../utils/sendResponse');
 const APIFeatures = require('../utils/apiFeatures');
 const createSendToken = require('../utils/createSendToken');
+const removeUnwantedFields = require('../utils/removeUnwantedFields');
 
 
 /*Configure AWS S3*/
@@ -71,7 +72,6 @@ exports.signup = catchAsync(async (req , res , next) => {
         email: req.body.email ,
         password: req.body.password ,
         passwordConfirm: req.body.passwordConfirm ,
-        role: req.body.role ,
     });
     createSendToken(newUser , 201 , req , res);
 });
@@ -144,7 +144,7 @@ exports.resetPassword = catchAsync(async (req , res , next) => {
 });
 
 /*Logged In Routes*/
-exports.updateMe = catchAsync(async (req , res , next) => {
+exports.updateData = catchAsync(async (req , res , next) => {
     // 1 Create error if user POSTs password data:
     if (req.body.password || req.body.passwordConfirm) {
         return next(new AppError('This route is not for password updates. Please use /updateMyPassword.',400));
@@ -162,11 +162,14 @@ exports.updateMe = catchAsync(async (req , res , next) => {
         filteredBody.prePhoto = req.file.location;
     }
 
-    // 3) Update user document:
-    const updatedUser = await User.findByIdAndUpdate(req.user.id , filteredBody , {
+    // 4 Update user document:
+    let updatedUser = await User.findByIdAndUpdate(req.user.id , filteredBody , {
         new: true,
         runValidators: true
     });
+
+    // 5 Remove unwanted fields:
+    updatedUser = removeUnwantedFields(updatedUser);
     
     sendResponse(res , 200 , { user: updatedUser });
 });
@@ -186,10 +189,6 @@ exports.updatePassword = catchAsync(async (req , res , next) => {
 
     // 4 log user in, send jwt:
     createSendToken(user , 200 , req , res);
-});
-exports.deleteMe = catchAsync(async (req , res , next) => {
-    await User.findByIdAndUpdate(req.user.id, { active: false });
-    sendResponse(res , 204 , null);
 });
 
 /*CRUD for Admin*/
