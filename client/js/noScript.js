@@ -1,0 +1,2 @@
+// ASSETS
+import './assets.js';
