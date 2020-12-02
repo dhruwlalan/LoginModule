@@ -1,21 +1,44 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const entries = require('./entries');
 
 module.exports = {
 	mode: 'development' ,
-	entry: { 
-		signup: path.resolve(__dirname, '../src/js/signup.js') ,
-		login: path.resolve(__dirname, '../src/js/login.js') ,
-		home: path.resolve(__dirname, '../src/js/home.js') ,
-		forgetPassword: path.resolve(__dirname, '../src/js/forgetPassword.js') ,
-		resetPassword: path.resolve(__dirname, '../src/js/resetPassword.js') ,
-		edit: path.resolve(__dirname, '../src/js/edit.js') ,
-	} ,
+	entry: entries ,
 	output: {
 		filename: '[name].bundle.js' ,
 		path: path.resolve(__dirname, '../public') ,
 	} ,
-	module: {
+	stats: {
+		assets: false ,
+		modules: false ,
+	    builtAt: false ,
+	    version: false ,
+	    timings: false ,
+	    entrypoints: false ,
+	    colors: true ,
+	    hash: false ,
+	    warnings: true ,
+	    errors: true ,
+	} ,
+	plugins: [
+		new MiniCssExtractPlugin({ filename: 'style.css' }) ,
+		new CleanWebpackPlugin() ,
+	] ,
+	optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/ ,
+                    name: 'vendor' ,
+                    chunks: 'all' ,
+                    enforce: true ,
+                }
+            }
+        }
+    } ,
+    module: {
 		rules: [
 			{
 				test: /\.html$/ ,
@@ -71,19 +94,4 @@ module.exports = {
 			} ,
 		]
 	} ,
-	plugins: [
-		new MiniCssExtractPlugin({ filename: 'style.css' }) ,
-	] ,
-	optimization: {
-        splitChunks: {
-            cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/ ,
-                    name: 'vendor' ,
-                    chunks: 'all' ,
-                    enforce: true ,
-                }
-            }
-        }
-    } ,
 };
