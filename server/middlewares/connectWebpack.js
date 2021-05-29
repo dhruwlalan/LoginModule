@@ -1,6 +1,5 @@
-
 module.exports = (app) => {
-	/*Hook webpack-dev-middleware with hot reload*/
+	//#Hook webpack-dev-middleware with hot reload#//
 	if (process.env.FENV === 'development') {
 		const webpack = require('webpack');
 		const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -10,16 +9,17 @@ module.exports = (app) => {
 		app.use(webpackDevMiddleware(compiler));
 		app.use(webpackHotMiddleware(compiler));
 	}
-	/*Inject Bundles */
+	//#Inject Bundles#//
 	if (process.env.FENV === 'production') {
 		const path = require('path');
 		const fs = require('fs');
 		let bundle = {};
 		const publicDir = path.join(__dirname, '../../public');
-		fs.readdir(publicDir , async (err , files) => {
+
+		fs.readdir(publicDir , (err , files) => {
 			if (err) return console.log('Unable to scan directory: ' + err);
-			let assetsName = await files.map((file) => file.split('.')[0]);
-			await files.forEach((file , i) => {
+			let assetsName = files.map((file) => file.split('.')[0]);
+			files.forEach((_file , i) => {
 				bundle = Object.defineProperty(bundle, assetsName[i] , {
 					value: files[i] ,
 					writable: true ,
@@ -27,7 +27,8 @@ module.exports = (app) => {
 				});
 			});
 		});
-		app.use((req, res, next) => {
+
+		app.use((_req, res, next) => {
 			res.locals.bundle = bundle
 			next();
 		});

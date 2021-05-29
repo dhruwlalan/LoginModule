@@ -3,7 +3,6 @@ const pug = require('pug');
 const htmlToText = require('html-to-text');
 
 module.exports = class Email {
-
 	constructor (user , url) {
 		this.from = `Login-Module-dl <${process.env.EMAIL_FROM }>`;
 		this.to = user.email;
@@ -30,7 +29,7 @@ module.exports = class Email {
 			});
 		}
 	}
-	
+
 	async send () {
 		const html = pug.renderFile(`${__dirname }/../views/resetPasswordEmail.pug` , {
 			url: this.url ,

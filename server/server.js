@@ -2,8 +2,7 @@ require('dotenv').config();
 const mongodb = require('./database/mongodb.js');
 const app = require('./app.js');
 
-
-/*Global Error Handlers for Unhandeled Errors*/
+//#Global Error Handlers for Unhandeled Errors#//
 process.on('unhandledRejection' , (err) => {
 	console.log('Unhandled Rejection Error: ' , err);
 	console.log('Shutting Down...');
@@ -19,10 +18,8 @@ process.on('SIGTERM' , () => {
 	server.close(() => { console.log('Process Terminated!') });
 });
 
-
-/*Connect to MongoDB*/
+//#Connect to MongoDB#//
 mongodb.connect();
 
-
-/*Start Server*/
+//#Start Server#//
 const server = app.listen(process.env.PORT || 8000);

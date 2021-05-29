@@ -1,4 +1,3 @@
-const path = require('path');
 const express = require('express');
 const basic = require('./middlewares/basic');
 const setSecurityHeaders = require('./middlewares/setSecurityHeaders');
@@ -7,27 +6,26 @@ const errorController = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
 const viewRouter = require('./routes/viewRoutes');
 
-/*Create Express App*/
+//#Create Express App#//
 const app = express();
 
-
-/* ** Setup Security Middlewares ** */
+//#Setup Security Middlewares#//
 setSecurityHeaders(app);
-/* ** Hook webpack-dev-middleware with hot reload ***/
+
+//#Hook webpack-dev-middleware with hot reload#//
 connectWebpack(app);
-/* ** Use Basic Middlewares ** */
+
+//#Use Basic Middlewares#//
 basic.setupTemplateEngin(app);
 basic.serverStaticFiles(app);
 basic.useParsers(app);
 basic.gzipResponses(app);
 
-
-/*Define Routes*/
+//#Define Routes#//
 app.use( '/api/v1/users' , userRouter );
 app.use( '/' , viewRouter );
 
-
-/*Global Error Handler Middleware, executed when passed argument inside next()*/
+//#Global Error Handler Middleware, executed when passed argument inside next()#//
 app.use(errorController);
 
 module.exports = app;

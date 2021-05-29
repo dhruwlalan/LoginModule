@@ -1,14 +1,14 @@
 const jwt = require('jsonwebtoken');
 const removeUnwantedFields = require('./removeUnwantedFields');
 
-/*Create Token*/
+//#Create Token#//
 const signToken = (id) => {
 	return jwt.sign({ id } , process.env.JWT_SECRET , {
 		expiresIn: process.env.JWT_EXPIRES_IN
 	});
 }
 
-/*Send Token*/
+//#Send Token#//
 module.exports = (user , statusCode , req , res) => {
 	// 1 get created token:
 	const token = signToken(user._id);

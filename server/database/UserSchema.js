@@ -3,7 +3,7 @@ const validator = require('validator');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
-/*Define User Schema*/
+//#Define User Schema#//
 const userSchema = new mongoose.Schema({
 	name: {
 		type: String ,
@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema({
 	passwordResetExpires: Date ,
 });
 
-/*Mongoose Query Middleware Hooks*/
+//#Mongoose Query Middleware Hooks#//
 userSchema.pre('save' , async function (next) {
 	if (this.isNew) {
 		this.password = await bcrypt.hash(this.password , 12);
@@ -70,7 +70,7 @@ userSchema.pre(/^find/ , function (next) {
 	next();
 });
 
-/*Instance Methods for Current Document Access*/
+//#Instance Methods for Current Document Access#//
 userSchema.methods.correctPassword = async function (postedPassword , storedPassword) {
 	return await bcrypt.compare(postedPassword , storedPassword);
 };
@@ -88,5 +88,5 @@ userSchema.methods.createPasswordResetToken = function () {
 	return resetToken;
 }
 
-/*Export the User Schema*/
+//#Export the User Schema#//
 module.exports = userSchema;

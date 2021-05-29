@@ -2,24 +2,24 @@ const router = require('express').Router({ strict: true });
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
 
-/*REST API - /api/v1/users/**/
+//#REST API - /api/v1/users/*#//
 
-/*Open Routes*/
+//#Open Routes#//
 router.post('/signup' , userController.signup);
 router.post('/login' , userController.login);
 router.get('/logout' , userController.logout);
 router.post('/forgetPassword' , userController.forgetPassword);
 router.patch('/resetPassword/:token' , userController.resetPassword);
 
-/*Check if the user is already logged in*/
+//#Check if the user is already logged in#//
 router.use(authController.isLoggedIn);
 
-/*Logged In Routes*/
+//#Logged In Routes#//
 router.use(authController.protect);
 router.patch('/updateMyData' , userController.uploadUserPhoto , userController.resizeUserPhoto , userController.updateData);
 router.patch('/updateMyPassword' , userController.updatePassword);
 
-/*Admin Routes CRUD*/
+//#Admin Routes CRUD#//
 router.use(authController.restrictTo('admin'));
 router.route('/')
    .get(userController.getAllUsers)
@@ -29,12 +29,11 @@ router.route('/:id')
    .patch(userController.updateUser)
    .delete(userController.deleteUser);
 
-/*Handle Undefined Routes*/
+//#Handle Undefined Routes#//
 router.all( '*' , (req , res , next) => {
 	res.status(404).render('pageNotFound' , {
 		unknownRoute: req.originalUrl ,
 	});
 });
 
-/*Export Router*/
 module.exports = router;
