@@ -11,13 +11,13 @@ const APIFeatures = require('../utils/apiFeatures');
 const createSendToken = require('../utils/createSendToken');
 const removeUnwantedFields = require('../utils/removeUnwantedFields');
 
-/*Configure AWS S3*/
+//#Configure AWS S3#//
 const s3 = new AWS.S3({
    accessKeyId: process.env.AWS_ID,
    secretAccessKey: process.env.AWS_SECRET,
 });
 
-/*Configure Multer & Sharp*/
+//#Configure Multer & Sharp#//
 const upload = multer({
    storage: multer.memoryStorage(),
    fileFilter: (req, file, cb) => {
@@ -29,7 +29,7 @@ const upload = multer({
    },
 });
 exports.uploadUserPhoto = upload.single('photo');
-exports.resizeUserPhoto = async (req, res, next) => {
+exports.resizeUserPhoto = async (req, _res, next) => {
    if (!req.file) return next();
    req.file.filename = `u-${req.user.id}-${Date.now()}.jpeg`;
 
@@ -70,7 +70,7 @@ exports.resizeUserPhoto = async (req, res, next) => {
    });
 };
 
-/*Open Routes*/
+//#Open Routes#//
 exports.signup = catchAsync(async (req, res) => {
    const newUser = await User.create({
       name: req.body.name,
@@ -96,7 +96,7 @@ exports.login = catchAsync(async (req, res, next) => {
    // legit user... send token:
    createSendToken(user, 200, req, res);
 });
-exports.logout = catchAsync(async (req, res) => {
+exports.logout = catchAsync(async (_req, res) => {
    res.cookie('jwt', 'loggedOut', {
       expires: new Date(Date.now() + 2 * 1000),
       httpOnly: true,
@@ -153,7 +153,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
    createSendToken(user, 200, req, res);
 });
 
-/*Logged In Routes*/
+//#Logged In Routes#//
 exports.updateData = catchAsync(async (req, res, next) => {
    // 1 Create error if user POSTs password data:
    if (req.body.password || req.body.passwordConfirm) {
@@ -206,7 +206,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
    createSendToken(user, 200, req, res);
 });
 
-/*CRUD for Admin*/
+//#CRUD for Admin#//
 exports.getAllUsers = catchAsync(async (req, res) => {
    const features = new APIFeatures(User.find(), req.query)
       .filter()

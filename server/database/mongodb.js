@@ -21,11 +21,7 @@ module.exports = {
             // Enables the new unified topology layer
             useUnifiedTopology: true,
          })
-         .then(() => {
-            console.log('DB Connection Successful!');
-         })
-         .catch((e) => {
-            console.log('DB Connection Unsuccessful! Error: ', e.message);
-         });
+         .then(() => console.log('DB Connection Successful!'))
+         .catch((e) => console.log('DB Connection Unsuccessful! Error: ', e.message));
    },
 };

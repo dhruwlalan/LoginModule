@@ -4,7 +4,7 @@ const User = require('../database/UserModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-/*Checking if the User is Logged In*/
+//#Checking if the User is Logged In#//
 exports.isLoggedIn = async (req, res, next) => {
    try {
       let token;
@@ -48,8 +48,8 @@ exports.isLoggedIn = async (req, res, next) => {
    next();
 };
 
-/*Protecting Routes to only Logged In Users*/
-exports.protect = catchAsync(async (req, res, next) => {
+//#Protecting Routes to only Logged In Users#//
+exports.protect = catchAsync(async (req, _res, next) => {
    if (!req.token)
       return next(new AppError('You are not logged in! Please login to get access', 401));
 
@@ -64,9 +64,9 @@ exports.protect = catchAsync(async (req, res, next) => {
    next();
 });
 
-/*Restricting Routes to only Admin Users */
+//#Restricting Routes to only Admin Users#//
 exports.restrictTo = (...roles) => {
-   return (req, res, next) => {
+   return (req, _res, next) => {
       if (!roles.includes(req.user.role)) {
          return next(
             new AppError('You do not have permission to perform this action', 403),

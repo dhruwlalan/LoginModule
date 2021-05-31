@@ -43,9 +43,5 @@ module.exports = (app) => {
    );
 
    //#6 Prevent parameter pollution:#//
-   app.use(
-      hpp({
-         whitelist: ['name', 'age'],
-      }),
-   );
+   app.use(hpp({ whitelist: ['name', 'age'] }));
 };

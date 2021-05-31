@@ -3,7 +3,6 @@ class APIFeatures {
       this.query = query;
       this.queryObj = queryObj;
    }
-
    filter() {
       const queryObjCopy = { ...this.queryObj };
       ['sort', 'fields', 'page', 'limit'].forEach((el) => {
