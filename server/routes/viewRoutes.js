@@ -6,20 +6,20 @@ const viewController = require('../controllers/viewController');
 router.use(authController.isLoggedIn);
 
 //#Open Routes#//
-router.get( '/signup' , viewController.signup);
-router.get( '/login' , viewController.login);
-router.get( '/forgetPassword' , viewController.forgetPassword);
-router.get( '/resetPassword/:token' , viewController.resetPassword);
-router.get( '/' , viewController.root);
+router.get('/signup', viewController.signup);
+router.get('/login', viewController.login);
+router.get('/forgetPassword', viewController.forgetPassword);
+router.get('/resetPassword/:token', viewController.resetPassword);
+router.get('/', viewController.root);
 
 //#Logged In Routes#//
-router.get( '/edit' , viewController.edit);
+router.get('/edit', viewController.edit);
 
 //#Handle Undefined Routes#//
-router.all( '*' , (req , res) => {
-	res.status(404).render('pageNotFound' , {
-		unknownRoute: req.originalUrl ,
-	});
+router.all('*', (req, res) => {
+   res.status(404).render('pageNotFound', {
+      unknownRoute: req.originalUrl,
+   });
 });
 
 module.exports = router;

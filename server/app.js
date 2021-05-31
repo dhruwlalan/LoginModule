@@ -22,8 +22,8 @@ basic.useParsers(app);
 basic.gzipResponses(app);
 
 //#Define Routes#//
-app.use( '/api/v1/users' , userRouter );
-app.use( '/' , viewRouter );
+app.use('/api/v1/users', userRouter);
+app.use('/', viewRouter);
 
 //#Global Error Handler Middleware, executed when passed argument inside next()#//
 app.use(errorController);
